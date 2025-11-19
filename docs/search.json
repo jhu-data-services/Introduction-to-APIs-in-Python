@@ -1,24 +1,472 @@
 [
   {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#learning-objectives",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#learning-objectives",
+    "title": "Introduction to APIs in Python",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this workshop, you should be able to:\n\nExplain what an API is.\nBe able to use API documentation to explore available API endpoints.\nFetch data from an API using the requests library.\nUnderstand pagination and be able to apply strategies to work with API limits.\nUse, and secure, an API key."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#todays-session",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#todays-session",
+    "title": "Introduction to APIs in Python",
+    "section": "Today’s Session",
+    "text": "Today’s Session\nThis session is a mixture of live-coding and lecture.\n\nPlease mute your microphone 🎙️.\nPlease use the chat 💬 feature to ask questions during the session.\nWe will have breaks every 50 minutes ☕.\nWe will update codeshare.io/apis-in-python during the live coding portion.\nAt the end of today’s session, please complete a short survey: bit.ly/apis-in-python-survey"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#ways-of-accessing-data",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#ways-of-accessing-data",
+    "title": "Introduction to APIs in Python",
+    "section": "Ways of accessing data",
+    "text": "Ways of accessing data\n\n\n\nManual\n\nDownload files from the web (CSV, Excel, Text, Parquet, etc.)\nCopy manually from websites (tables, charts, text)\nExtract data from documents (Word or PDFs)\n\n\nAutomatic\n\nDatabases\nAPIs\nWeb Scraping (Extract information from web pages programmatically)\nSensors"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#why-use-an-api",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#why-use-an-api",
+    "title": "Introduction to APIs in Python",
+    "section": "Why use an API?",
+    "text": "Why use an API?\n\nYou need the most up-to-date information.\nYou don’t need everything - you can ask for exactly what you want.\nIt’s repeatable - you can write code once, and reuse everytime you need new data."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-an-api",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-an-api",
+    "title": "Introduction to APIs in Python",
+    "section": "What is an API?",
+    "text": "What is an API?\n\nAPI stands for:\nApplication Programming Interface\n\n\nAn API provides a way to communicate between your computer (the client) and a remote web service (the server)."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-get-cooking",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-get-cooking",
+    "title": "Introduction to APIs in Python",
+    "section": "Lets get cooking 🌶️",
+    "text": "Lets get cooking 🌶️\n\nYou go to a restaurant.\n\n\nRather than waiting to be seated you poke your head into the kitchen, and ask for a grilled cheese sandwich.\n\n\nThe chef promptly throws a spatula at your head. Now you have nothing to show for your effort but a head injury."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-1",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-1",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "What went wrong?\n\nYou need someone to translate your request in a way the chef understands!\n\n\nYou need an API!"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-2",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-2",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Let’s try this again.\n\nYou (the client) enter the restaurant and are seated.\n\n\nA waiter (the API) arrives to take your order. You ask for a grilled cheese, extra cheese, with tomato. The waiter notes your order on a slip of paper (the request), which he posts on the turnstile at the kitchen.\n\n\nThe chef (server) reviews the request’s instructions, prepares a grilled cheese sandwich , and places it on the kitchen window, and hit’s a bell.\n\n\nYour server, hearing the bell, brings you the grilled cheese sandwhich (the response), along with an apology from the chef for the head injury."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-3",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-3",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Client: Requests grilled cheese\nAPI: Receives request and delivers to kitchen\nServer: Reviews request and generates response (grilled cheese)\nAPI: delivers response to client"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#types-of-apis",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#types-of-apis",
+    "title": "Introduction to APIs in Python",
+    "section": "Types of APIs",
+    "text": "Types of APIs\n\nSOAP (legacy): XML-based, structured, rigid (common in banking/healthcare)\n\n\nREST (modern): Flexible, human-readable, usually returns JSON."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#requests",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#requests",
+    "title": "Introduction to APIs in Python",
+    "section": "Requests",
+    "text": "Requests\nWhen you want data from an API, you send a request. This request contains:\n\nThe name of the resource you would like to access (data)\nA verb indicating what you want to do with the data."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#rest-and-http-methods",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#rest-and-http-methods",
+    "title": "Introduction to APIs in Python",
+    "section": "REST and HTTP Methods",
+    "text": "REST and HTTP Methods\nCommon verbs in Rest APIs:\n\nGet: Retreive data (most common)\nPost: Create data\nPut: Update data\nDelete: Remove data\n\n\nFor data retrieval, we use GET.\n\n\nExample:\nGET https://pokeapi.co/api/v2/pokemon?limit=3&offset=0"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-request-structure",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-request-structure",
+    "title": "Introduction to APIs in Python",
+    "section": "API Request Structure",
+    "text": "API Request Structure\nA typical API request has four main parts:\n\nHTTP Verb: what we are doing GET\nBase URL: main address https://pokeapi.co/api/v2\nEndpoint: the specific resource we are acting on /pokemon\nQuery Parameters: optional filters\n?limit=3&offset=10\n\n\nFull request:\nGET https://pokeapi.co/api/v2/pokemon?limit=3&offset=10"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#structure-of-an-api-response",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#structure-of-an-api-response",
+    "title": "Introduction to APIs in Python",
+    "section": "Structure of an API Response",
+    "text": "Structure of an API Response\nEach API response is composed of two parts:\n\nheader: information about the data (metadata)\n\n\nbody: the data (usually JSON)"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-4",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-4",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Think of an API response like an envelope you received in the mail."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-5",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-5",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "On the outside of the envelope there is information like:\n\nThe address it was addressed to\nThe address where it came from\nThe postage date, which indicates when it was posted\n\n\nThis metadata, or “data about data”, tells you about the letter contained within — who sent it, to whom, and when?.\n\n\nIn an API response this is the API header. It contains information about the data being delivered.\n\n\nThe body of the API contains the actual contents of the letter (the data). These data are most commonly delivered as a JSON."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-json",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-json",
+    "title": "Introduction to APIs in Python",
+    "section": "What is JSON?",
+    "text": "What is JSON?\nJSON stands for JavaScript Object Notation.\n\nIt’s the most common format for data exchanged through APIs.\n\n\nThink of JSON as a structured way of storing key–value pairs, like a list or dictionary in R or Python."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#json-structure",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#json-structure",
+    "title": "Introduction to APIs in Python",
+    "section": "JSON Structure",
+    "text": "JSON Structure\nJSON objects are made of:\n\nKeys (the name of a data field)\nValues (the data associated with that key)\n\n\n{\n  \"name\": \"Pikachu\",\n  \"height\": 4,\n  \"weight\": 60,\n  \"abilities\": [\"static\", \"lightning-rod\"]\n}"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#status-code",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#status-code",
+    "title": "Introduction to APIs in Python",
+    "section": "Status Code",
+    "text": "Status Code\nThe status code tells you whether the request succeeded or failed\n\n\n\n\n\n\n\n\n\nCode\nMeaning\nDescription\n\n\n\n\n200\n✅ OK\nThe request succeeded and data is returned.\n\n\n201\n🆕 Created\nA new resource was successfully created.\n\n\n400\n⚠️ Bad Request\nThe request was malformed or invalid.\n\n\n401\n🔐 Unauthorized\nMissing or invalid API key.\n\n\n403\n🚫 Forbidden\nYou don’t have permission to access the resource.\n\n\n404\n❓ Not Found\nThe endpoint or item doesn’t exist.\n\n\n429\n🕐 Too Many Requests\nYou’ve hit the API’s rate limit.\n\n\n500\n💥 Server Error\nSomething went wrong on the server side."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints",
+    "title": "Introduction to APIs in Python",
+    "section": "API Endpoints",
+    "text": "API Endpoints\nAn API endpoint is a gateway where data is sent and received.\nIn RESTful web APIs, this corresponds to a URL.\n\nhttps://pokeapi.co/api/v2/"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints-1",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints-1",
+    "title": "Introduction to APIs in Python",
+    "section": "API Endpoints",
+    "text": "API Endpoints\nAn API endpoint is a gateway where data is sent and received.\nIn RESTful web APIs, this corresponds to a URL.\nhttps://pokeapi.co/api/v2/{endpoint}"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-documentation",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-documentation",
+    "title": "Introduction to APIs in Python",
+    "section": "API Documentation",
+    "text": "API Documentation\nhttps://pokeapi.co/docs/v2#pokemon-section"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#abilities",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#abilities",
+    "title": "Introduction to APIs in Python",
+    "section": "Abilities",
+    "text": "Abilities\nAbilities provide passive effects for Pokémon in battle or in the overworld.\n\nGET https://pokeapi.co/api/v2/ability\n\n\n{\n  \"count\": 367,\n  \"next\": \"https://pokeapi.co/api/v2/ability/?offset=20&limit=20\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"name\": \"stench\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/1/\"\n    },\n    {\n      \"name\": \"drizzle\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/2/\"\n    },\n    {\n      \"name\": \"speed-boost\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/3/\"\n    },\n    {\n      \"name\": \"battle-armor\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/4/\"\n    },\n    {\n      \"name\": \"sturdy\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/5/\"\n    },"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#item",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#item",
+    "title": "Introduction to APIs in Python",
+    "section": "Item",
+    "text": "Item\nAn item is an object in the games which the player can pick up, keep in their bag, and use in some manner. They have various uses, including healing, powering up, helping catch Pokémon, or to access a new area.\n\nGET https://pokeapi.co/api/v2/item\n\n\n{\n  \"count\": 2180,\n  \"next\": \"https://pokeapi.co/api/v2/item/?offset=20&limit=20\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"name\": \"master-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/1/\"\n    },\n    {\n      \"name\": \"ultra-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/2/\"\n    },\n    {\n      \"name\": \"great-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/3/\"\n    },\n    {\n      \"name\": \"poke-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/4/\"\n    },\n    {\n      \"name\": \"safari-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/5/\"\n    },\n    {\n      \"name\": \"net-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/6/\"\n    },\n    {\n      \"name\": \"dive-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/7/\"\n    },\n    {\n      \"name\": \"nest-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/8/\"\n    },\n    {\n      \"name\": \"repeat-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/9/\""
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#pagination",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#pagination",
+    "title": "Introduction to APIs in Python",
+    "section": "Pagination 📄",
+    "text": "Pagination 📄\nMany APIs return only part of the dataset at once.\n\nAddditionally, APIs often enact limits on the number of results that can be returned over a given time period.\n\n\nWhich parts of the dataset are returned are controlled by two parameters:\n\n\nlimit: how many records to return\n\n\noffset: how many records to skip\n\n\nTo get all results, you can loop over offsets:\n\n\nhttps://pokeapi.co/api/v2/item/?offset=20&limit=20"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key",
+    "title": "Introduction to APIs in Python",
+    "section": "API Key 🔑",
+    "text": "API Key 🔑\n\nMany APIs require something called an API Key\n\n\nAn API key is a unique code used to identify and authenticate a user or application when interacting with an API.\n\n\nAPI keys are generally a string of alphanumeric characters, and look something like this:\n\n\nzaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx\n\n\nAPI keys are a security measure to make sure you, or your application, are who you say you are."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key-1",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key-1",
+    "title": "Introduction to APIs in Python",
+    "section": "API Key 🔑",
+    "text": "API Key 🔑\nAn API key is like an ID card. You wouldn’t leave your ID card laying around. Anyone could just pick it up and pretend they are you!\n\nIf you store plaintext API keys in code and share it (e.g., on GitHub), anyone with access can read it!\n\n\nimport requests\n\nAPI_KEY = 'zaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtl'\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nrequests.get(path_url, params=params)"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#how-do-we-protect-our-api-keys",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#how-do-we-protect-our-api-keys",
+    "title": "Introduction to APIs in Python",
+    "section": "How do we protect our API keys?",
+    "text": "How do we protect our API keys?"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables",
+    "title": "Introduction to APIs in Python",
+    "section": "Environment Variables",
+    "text": "Environment Variables\nA variable allows us to store information, and an environment is the system we execute our code on.\n\nEnvironment variables allow us to store information specific to a system in variables.\n\n\nEnvironment variables are not stored within our codebase, but are instead stored in a system specific configuration file.\n\n\nWe can use the environment variables configuration file to store our API key, and reference the configuration file in our code in order to load the API key."
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables-in-r",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables-in-r",
+    "title": "Introduction to APIs in Python",
+    "section": "Environment Variables in R",
+    "text": "Environment Variables in R\nIn Python, environment variables can be stored in a text file .env with name-value pairs.\n\nWe can then edit that file, using our editor of choice:\necho API_KEY=zaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx &gt; .env"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-7",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-7",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Now we can update our code to retrieve our API environment variable:\n\nimport requests\nfrom dotenv import load_dotenv\nimport os\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\nAPI_KEY = os.environ.get('API_KEY')\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nrequests.get(path_url, params=params)"
+  },
+  {
+    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-give-it-a-try",
+    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-give-it-a-try",
+    "title": "Introduction to APIs in Python",
+    "section": "Let’s give it a try!",
+    "text": "Let’s give it a try!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to APIs in Python Workshop - Fall 2025",
+    "section": "",
+    "text": "This page contains the slides and accompanying code for the November 12th Data Services Workshop: Introduction to APIs in Python."
+  },
+  {
+    "objectID": "index.html#introduction-to-apis-in-python",
+    "href": "index.html#introduction-to-apis-in-python",
+    "title": "Introduction to APIs in Python Workshop - Fall 2025",
+    "section": "",
+    "text": "This page contains the slides and accompanying code for the November 12th Data Services Workshop: Introduction to APIs in Python."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#learning-objectives",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#learning-objectives",
+    "title": "Introduction to APIs in Python",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this workshop, you should be able to:\n\nExplain what an API is.\nBe able to use API documentation to explore available API endpoints.\nFetch data from an API using the requests library.\nUnderstand pagination and be able to apply strategies to work with API limits.\nUse, and secure, an API key."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#todays-session",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#todays-session",
+    "title": "Introduction to APIs in Python",
+    "section": "Today’s Session",
+    "text": "Today’s Session\nThis session is a mixture of live-coding and lecture.\n\nPlease mute your microphone 🎙️.\nPlease use the chat 💬 feature to ask questions during the session.\nWe will have breaks every 50 minutes ☕.\nWe will update codeshare.io/apis-in-python during the live coding portion.\nAt the end of today’s session, please complete a short survey: bit.ly/apis-in-python-survey"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#ways-of-accessing-data",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#ways-of-accessing-data",
+    "title": "Introduction to APIs in Python",
+    "section": "Ways of accessing data",
+    "text": "Ways of accessing data\n\n\n\nManual\n\nDownload files from the web (CSV, Excel, Text, Parquet, etc.)\nCopy manually from websites (tables, charts, text)\nExtract data from documents (Word or PDFs)\n\n\nAutomatic\n\nDatabases\nAPIs\nWeb Scraping (Extract information from web pages programmatically)\nSensors"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#why-use-an-api",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#why-use-an-api",
+    "title": "Introduction to APIs in Python",
+    "section": "Why use an API?",
+    "text": "Why use an API?\n\nYou need the most up-to-date information.\nYou don’t need everything - you can ask for exactly what you want.\nIt’s repeatable - you can write code once, and reuse everytime you need new data."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#what-is-an-api",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#what-is-an-api",
+    "title": "Introduction to APIs in Python",
+    "section": "What is an API?",
+    "text": "What is an API?\n\nAPI stands for:\nApplication Programming Interface\n\n\nAn API provides a way to communicate between your computer (the client) and a remote web service (the server)."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#lets-get-cooking",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#lets-get-cooking",
+    "title": "Introduction to APIs in Python",
+    "section": "Lets get cooking 🌶️",
+    "text": "Lets get cooking 🌶️\n\nYou go to a restaurant.\n\n\nRather than waiting to be seated you poke your head into the kitchen, and ask for a grilled cheese sandwich.\n\n\nThe chef promptly throws a spatula at your head. Now you have nothing to show for your effort but a head injury."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#section-1",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#section-1",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "What went wrong?\n\nYou need someone to translate your request in a way the chef understands!\n\n\nYou need an API!"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#section-2",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#section-2",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Let’s try this again.\n\nYou (the client) enter the restaurant and are seated.\n\n\nA waiter (the API) arrives to take your order. You ask for a grilled cheese, extra cheese, with tomato. The waiter notes your order on a slip of paper (the request), which he posts on the turnstile at the kitchen.\n\n\nThe chef (server) reviews the request’s instructions, prepares a grilled cheese sandwich , and places it on the kitchen window, and hit’s a bell.\n\n\nYour server, hearing the bell, brings you the grilled cheese sandwhich (the response), along with an apology from the chef for the head injury."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#section-3",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#section-3",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Client: Requests grilled cheese\nAPI: Receives request and delivers to kitchen\nServer: Reviews request and generates response (grilled cheese)\nAPI: delivers response to client"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#types-of-apis",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#types-of-apis",
+    "title": "Introduction to APIs in Python",
+    "section": "Types of APIs",
+    "text": "Types of APIs\n\nSOAP (legacy): XML-based, structured, rigid (common in banking/healthcare)\n\n\nREST (modern): Flexible, human-readable, usually returns JSON."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#requests",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#requests",
+    "title": "Introduction to APIs in Python",
+    "section": "Requests",
+    "text": "Requests\nWhen you want data from an API, you send a request. This request contains:\n\nThe name of the resource you would like to access (data)\nA verb indicating what you want to do with the data."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#rest-and-http-methods",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#rest-and-http-methods",
+    "title": "Introduction to APIs in Python",
+    "section": "REST and HTTP Methods",
+    "text": "REST and HTTP Methods\nCommon verbs in Rest APIs:\n\nGet: Retreive data (most common)\nPost: Create data\nPut: Update data\nDelete: Remove data\n\n\nFor data retrieval, we use GET.\n\n\nExample:\nGET https://pokeapi.co/api/v2/pokemon?limit=3&offset=0"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#api-request-structure",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#api-request-structure",
+    "title": "Introduction to APIs in Python",
+    "section": "API Request Structure",
+    "text": "API Request Structure\nA typical API request has four main parts:\n\nHTTP Verb: what we are doing GET\nBase URL: main address https://pokeapi.co/api/v2\nEndpoint: the specific resource we are acting on /pokemon\nQuery Parameters: optional filters\n?limit=3&offset=10\n\n\nFull request:\nGET https://pokeapi.co/api/v2/pokemon?limit=3&offset=10"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#structure-of-an-api-response",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#structure-of-an-api-response",
+    "title": "Introduction to APIs in Python",
+    "section": "Structure of an API Response",
+    "text": "Structure of an API Response\nEach API response is composed of two parts:\n\nheader: information about the data (metadata)\n\n\nbody: the data (usually JSON)"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#section-4",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#section-4",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Think of an API response like an envelope you received in the mail."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#section-5",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#section-5",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "On the outside of the envelope there is information like:\n\nThe address it was addressed to\nThe address where it came from\nThe postage date, which indicates when it was posted\n\n\nThis metadata, or “data about data”, tells you about the letter contained within — who sent it, to whom, and when?.\n\n\nIn an API response this is the API header. It contains information about the data being delivered.\n\n\nThe body of the API contains the actual contents of the letter (the data). These data are most commonly delivered as a JSON."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#what-is-json",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#what-is-json",
+    "title": "Introduction to APIs in Python",
+    "section": "What is JSON?",
+    "text": "What is JSON?\nJSON stands for JavaScript Object Notation.\n\nIt’s the most common format for data exchanged through APIs.\n\n\nThink of JSON as a structured way of storing key–value pairs, like a list or dictionary in R or Python."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#json-structure",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#json-structure",
+    "title": "Introduction to APIs in Python",
+    "section": "JSON Structure",
+    "text": "JSON Structure\nJSON objects are made of:\n\nKeys (the name of a data field)\nValues (the data associated with that key)\n\n\n{\n  \"name\": \"Pikachu\",\n  \"height\": 4,\n  \"weight\": 60,\n  \"abilities\": [\"static\", \"lightning-rod\"]\n}"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#status-code",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#status-code",
+    "title": "Introduction to APIs in Python",
+    "section": "Status Code",
+    "text": "Status Code\nThe status code tells you whether the request succeeded or failed\n\n\n\n\n\n\n\n\n\nCode\nMeaning\nDescription\n\n\n\n\n200\n✅ OK\nThe request succeeded and data is returned.\n\n\n201\n🆕 Created\nA new resource was successfully created.\n\n\n400\n⚠️ Bad Request\nThe request was malformed or invalid.\n\n\n401\n🔐 Unauthorized\nMissing or invalid API key.\n\n\n403\n🚫 Forbidden\nYou don’t have permission to access the resource.\n\n\n404\n❓ Not Found\nThe endpoint or item doesn’t exist.\n\n\n429\n🕐 Too Many Requests\nYou’ve hit the API’s rate limit.\n\n\n500\n💥 Server Error\nSomething went wrong on the server side."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#api-endpoints",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#api-endpoints",
+    "title": "Introduction to APIs in Python",
+    "section": "API Endpoints",
+    "text": "API Endpoints\nAn API endpoint is a gateway where data is sent and received.\nIn RESTful web APIs, this corresponds to a URL.\n\nhttps://pokeapi.co/api/v2/"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#api-endpoints-1",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#api-endpoints-1",
+    "title": "Introduction to APIs in Python",
+    "section": "API Endpoints",
+    "text": "API Endpoints\nAn API endpoint is a gateway where data is sent and received.\nIn RESTful web APIs, this corresponds to a URL.\nhttps://pokeapi.co/api/v2/{endpoint}"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#api-documentation",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#api-documentation",
+    "title": "Introduction to APIs in Python",
+    "section": "API Documentation",
+    "text": "API Documentation\nhttps://pokeapi.co/docs/v2#pokemon-section"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#abilities",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#abilities",
+    "title": "Introduction to APIs in Python",
+    "section": "Abilities",
+    "text": "Abilities\nAbilities provide passive effects for Pokémon in battle or in the overworld.\n\nGET https://pokeapi.co/api/v2/ability\n\n\n{\n  \"count\": 367,\n  \"next\": \"https://pokeapi.co/api/v2/ability/?offset=20&limit=20\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"name\": \"stench\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/1/\"\n    },\n    {\n      \"name\": \"drizzle\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/2/\"\n    },\n    {\n      \"name\": \"speed-boost\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/3/\"\n    },\n    {\n      \"name\": \"battle-armor\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/4/\"\n    },\n    {\n      \"name\": \"sturdy\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/5/\"\n    },"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#item",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#item",
+    "title": "Introduction to APIs in Python",
+    "section": "Item",
+    "text": "Item\nAn item is an object in the games which the player can pick up, keep in their bag, and use in some manner. They have various uses, including healing, powering up, helping catch Pokémon, or to access a new area.\n\nGET https://pokeapi.co/api/v2/item\n\n\n{\n  \"count\": 2180,\n  \"next\": \"https://pokeapi.co/api/v2/item/?offset=20&limit=20\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"name\": \"master-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/1/\"\n    },\n    {\n      \"name\": \"ultra-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/2/\"\n    },\n    {\n      \"name\": \"great-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/3/\"\n    },\n    {\n      \"name\": \"poke-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/4/\"\n    },\n    {\n      \"name\": \"safari-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/5/\"\n    },\n    {\n      \"name\": \"net-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/6/\"\n    },\n    {\n      \"name\": \"dive-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/7/\"\n    },\n    {\n      \"name\": \"nest-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/8/\"\n    },\n    {\n      \"name\": \"repeat-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/9/\""
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#pagination",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#pagination",
+    "title": "Introduction to APIs in Python",
+    "section": "Pagination 📄",
+    "text": "Pagination 📄\nMany APIs return only part of the dataset at once.\n\nAddditionally, APIs often enact limits on the number of results that can be returned over a given time period.\n\n\nWhich parts of the dataset are returned are controlled by two parameters:\n\n\nlimit: how many records to return\n\n\noffset: how many records to skip\n\n\nTo get all results, you can loop over offsets:\n\n\nhttps://pokeapi.co/api/v2/item/?offset=20&limit=20"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#api-key",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#api-key",
+    "title": "Introduction to APIs in Python",
+    "section": "API Key 🔑",
+    "text": "API Key 🔑\n\nMany APIs require something called an API Key\n\n\nAn API key is a unique code used to identify and authenticate a user or application when interacting with an API.\n\n\nAPI keys are generally a string of alphanumeric characters, and look something like this:\n\n\nzaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx\n\n\nAPI keys are a security measure to make sure you, or your application, are who you say you are."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#api-key-1",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#api-key-1",
+    "title": "Introduction to APIs in Python",
+    "section": "API Key 🔑",
+    "text": "API Key 🔑\nAn API key is like an ID card. You wouldn’t leave your ID card laying around. Anyone could just pick it up and pretend they are you!\n\nIf you store plaintext API keys in code and share it (e.g., on GitHub), anyone with access can read it!\n\n\nimport requests\n\nAPI_KEY = 'zaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtl'\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nrequests.get(path_url, params=params)"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#how-do-we-protect-our-api-keys",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#how-do-we-protect-our-api-keys",
+    "title": "Introduction to APIs in Python",
+    "section": "How do we protect our API keys?",
+    "text": "How do we protect our API keys?"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#environment-variables",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#environment-variables",
+    "title": "Introduction to APIs in Python",
+    "section": "Environment Variables",
+    "text": "Environment Variables\nA variable allows us to store information, and an environment is the system we execute our code on.\n\nEnvironment variables allow us to store information specific to a system in variables.\n\n\nEnvironment variables are not stored within our codebase, but are instead stored in a system specific configuration file.\n\n\nWe can use the environment variables configuration file to store our API key, and reference the configuration file in our code in order to load the API key."
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#environment-variables-in-r",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#environment-variables-in-r",
+    "title": "Introduction to APIs in Python",
+    "section": "Environment Variables in R",
+    "text": "Environment Variables in R\nIn Python, environment variables can be stored in a text file .env with name-value pairs.\n\nWe can then edit that file, using our editor of choice:\necho API_KEY=zaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx &gt; .env"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#section-7",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#section-7",
+    "title": "Introduction to APIs in Python",
+    "section": "",
+    "text": "Now we can update our code to retrieve our API environment variable:\n\nimport requests\nfrom dotenv import load_dotenv\nimport os\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\nAPI_KEY = os.environ.get('API_KEY')\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nrequests.get(path_url, params=params)"
+  },
+  {
+    "objectID": "Introduction-to-APIs-in-Python-Presentation.html#lets-give-it-a-try",
+    "href": "Introduction-to-APIs-in-Python-Presentation.html#lets-give-it-a-try",
+    "title": "Introduction to APIs in Python",
+    "section": "Let’s give it a try!",
+    "text": "Let’s give it a try!"
+  },
+  {
     "objectID": "Introduction-to-APIs-in-Python-Tutorial.html",
     "href": "Introduction-to-APIs-in-Python-Tutorial.html",
     "title": "Introduction to APIs in Python Tutorial",
     "section": "",
     "text": "import requests\n\nSet the base URL to the pokemon API and specify our endpoint.\nOur base url is https://pokeapi.co/api/v2.\nThe endpoint of interest is pokemon.\n\nBASE_URL = 'https://pokeapi.co/api/v2'\nendpoint = 'pokemon'\n## Construct API url from base url and endpoint\nurl_path = f'{BASE_URL}/{endpoint}/'\n\n\nresponse = requests.get(url_path)\n\nConfirm that the request was successful (status code 200)\n\nprint(response.status_code)\n\n200\n\n\nTo see the URL that was sent with the get request (which can be helpful for troublshooting a malformed request), you can extract the url path associated with a corresponding response:\n\nprint(response.url)\n\nhttps://pokeapi.co/api/v2/pokemon/"
-  },
-  {
-    "objectID": "Introduction-to-APIs-in-Python-Tutorial.html#introduction-to-the-fundamentals-of-api-get-requests-with-the-pokemon-api",
-    "href": "Introduction-to-APIs-in-Python-Tutorial.html#introduction-to-the-fundamentals-of-api-get-requests-with-the-pokemon-api",
-    "title": "Introduction to APIs in Python Tutorial",
-    "section": "",
-    "text": "import requests\n\nSet the base URL to the pokemon API and specify our endpoint.\n\nBASE_URL = 'https://pokeapi.co/api/v2'\nendpoint = 'pokemon'\n## Construct API url from base url and endpoint\nurl_path = f'{BASE_URL}/{endpoint}/'\n\n\nresponse = requests.get(url_path)\n\nConfirm that the request was successful (status code 200)\n\nprint(response.status_code)\n\n200\n\n\nTo see the URL that was sent with the get request (which can be helpful for troublshooting a malformed request), you can extract the url path associated with a corresponding response:\n\nprint(response.url)\n\nhttps://pokeapi.co/api/v2/pokemon/\n\n\nExtract the JSON (Javascript Object Notation) data payload from a response:\n\ndata = response.json()\n\n\n\n\n\n\n\nTipExercise 1: Print all of the pokemon names from the first page of results returned by the API.\n\n\n\nTip: response.json() converts the json payload to a dictionary in Python.\n\n\n\n\n\n\n\n\nTipExercise 1 Solution\n\n\n\n\n\n\nfor pokemon in data['results']:\n    print(pokemon.get('name'))\n\nbulbasaur\nivysaur\nvenusaur\ncharmander\ncharmeleon\ncharizard\nsquirtle\nwartortle\nblastoise\ncaterpie\nmetapod\nbutterfree\nweedle\nkakuna\nbeedrill\npidgey\npidgeotto\npidgeot\nrattata\nraticate"
-  },
-  {
-    "objectID": "Introduction-to-APIs-in-Python-Tutorial.html#another-heading",
-    "href": "Introduction-to-APIs-in-Python-Tutorial.html#another-heading",
-    "title": "Introduction to APIs in Python Tutorial",
-    "section": "Another heading",
-    "text": "Another heading\n\n\n\n\n\n\nTipExercise 1 Solution\n\n\n\n\nfor pokemon in data['results']:\n    print(pokemon.get('name'))\n\nbulbasaur\nivysaur\nvenusaur\ncharmander\ncharmeleon\ncharizard\nsquirtle\nwartortle\nblastoise\ncaterpie\nmetapod\nbutterfree\nweedle\nkakuna\nbeedrill\npidgey\npidgeotto\npidgeot\nrattata\nraticate"
   },
   {
     "objectID": "Introduction-to-APIs-in-Python-Tutorial.html#building-a-request",
@@ -42,230 +490,6 @@
     "text": "Pagination\nIn our data is a field called next:\n\nprint(data.get('next'))\n\nhttps://pokeapi.co/api/v2/pokemon/?offset=20&limit=20\n\n\nThe next field contains a URL that correspond to a get request API url that points to the next page of data.\nThere are two parameters that govern which page we are retrieving, offset and limit.\noffset=20 tells us to start with the next 20 pokemon.\nlimit=20 tells us to return only 20 pokemon.\nIn this way, we can increment the offset by 20, until we have returned all of the pokemon available through the API. Fortunately this API did this work for us, and we only need to make API calls using each next url.\nFor example, lets use the first next url to make another API call, and see what the subsequent next url looks like:\n\nresponse = requests.get(data.get('next'))\ndata = response.json()\nprint(data.get('next'))\n\nhttps://pokeapi.co/api/v2/pokemon/?offset=40&limit=20\n\n\nAs you can see, the offset has been incremented by 20.\nWe need to find a way of iterating through each next url, making an API call, and collecting the returned data, until the next URL is None, and no data remains.\nWe can do this with a while loop. This is not the only way to approach this, but it is one way.\n\n# Create an empty list that we can collect our data into\npokemon_list = []\nwhile url_path:\n    response = requests.get(url_path)\n    data = response.json()\n    # Extend since we are adding a list, not append, which only \n    # adds a single element.\n    pokemon_list.extend(data.get('results'))\n    # Make sure to update the url to the next url in the API response\n    url_path = data.get('next')\n\nNow try printing all of the pokemon, not just the first 20:\n\nfor pokemon in pokemon_list:\n    print(pokemon.get('name'))\n\n\n\n\nbulbasaur\nivysaur\nvenusaur\ncharmander\ncharmeleon\ncharizard\nsquirtle\nwartortle\nblastoise\ncaterpie\nmetapod\nbutterfree\nweedle\nkakuna\nbeedrill\npidgey\npidgeotto\npidgeot\nrattata\nraticate\nspearow\nfearow\nekans\narbok\npikachu\nraichu\nsandshrew\nsandslash\nnidoran-f\nnidorina\nnidoqueen\nnidoran-m\nnidorino\nnidoking\nclefairy\nclefable\nvulpix\nninetales\njigglypuff\nwigglytuff\nzubat\ngolbat\noddish\ngloom\nvileplume\nparas\nparasect\nvenonat\nvenomoth\ndiglett\ndugtrio\nmeowth\npersian\npsyduck\ngolduck\nmankey\nprimeape\ngrowlithe\narcanine\npoliwag\npoliwhirl\npoliwrath\nabra\nkadabra\nalakazam\nmachop\nmachoke\nmachamp\nbellsprout\nweepinbell\nvictreebel\ntentacool\ntentacruel\ngeodude\ngraveler\ngolem\nponyta\nrapidash\nslowpoke\nslowbro\nmagnemite\nmagneton\nfarfetchd\ndoduo\ndodrio\nseel\ndewgong\ngrimer\nmuk\nshellder\ncloyster\ngastly\nhaunter\ngengar\nonix\ndrowzee\nhypno\nkrabby\nkingler\nvoltorb\nelectrode\nexeggcute\nexeggutor\ncubone\nmarowak\nhitmonlee\nhitmonchan\nlickitung\nkoffing\nweezing\nrhyhorn\nrhydon\nchansey\ntangela\nkangaskhan\nhorsea\nseadra\ngoldeen\nseaking\nstaryu\nstarmie\nmr-mime\nscyther\njynx\nelectabuzz\nmagmar\npinsir\ntauros\nmagikarp\ngyarados\nlapras\nditto\neevee\nvaporeon\njolteon\nflareon\nporygon\nomanyte\nomastar\nkabuto\nkabutops\naerodactyl\nsnorlax\narticuno\nzapdos\nmoltres\ndratini\ndragonair\ndragonite\nmewtwo\nmew\nchikorita\nbayleef\nmeganium\ncyndaquil\nquilava\ntyphlosion\ntotodile\ncroconaw\nferaligatr\nsentret\nfurret\nhoothoot\nnoctowl\nledyba\nledian\nspinarak\nariados\ncrobat\nchinchou\nlanturn\npichu\ncleffa\nigglybuff\ntogepi\ntogetic\nnatu\nxatu\nmareep\nflaaffy\nampharos\nbellossom\nmarill\nazumarill\nsudowoodo\npolitoed\nhoppip\nskiploom\njumpluff\naipom\nsunkern\nsunflora\nyanma\nwooper\nquagsire\nespeon\numbreon\nmurkrow\nslowking\nmisdreavus\nunown\nwobbuffet\ngirafarig\npineco\nforretress\ndunsparce\ngligar\nsteelix\nsnubbull\ngranbull\nqwilfish\nscizor\nshuckle\nheracross\nsneasel\nteddiursa\nursaring\nslugma\nmagcargo\nswinub\npiloswine\ncorsola\nremoraid\noctillery\ndelibird\nmantine\nskarmory\nhoundour\nhoundoom\nkingdra\nphanpy\ndonphan\nporygon2\nstantler\nsmeargle\ntyrogue\nhitmontop\nsmoochum\nelekid\nmagby\nmiltank\nblissey\nraikou\nentei\nsuicune\nlarvitar\npupitar\ntyranitar\nlugia\nho-oh\ncelebi\ntreecko\ngrovyle\nsceptile\ntorchic\ncombusken\nblaziken\nmudkip\nmarshtomp\nswampert\npoochyena\nmightyena\nzigzagoon\nlinoone\nwurmple\nsilcoon\nbeautifly\ncascoon\ndustox\nlotad\nlombre\nludicolo\nseedot\nnuzleaf\nshiftry\ntaillow\nswellow\nwingull\npelipper\nralts\nkirlia\ngardevoir\nsurskit\nmasquerain\nshroomish\nbreloom\nslakoth\nvigoroth\nslaking\nnincada\nninjask\nshedinja\nwhismur\nloudred\nexploud\nmakuhita\nhariyama\nazurill\nnosepass\nskitty\ndelcatty\nsableye\nmawile\naron\nlairon\naggron\nmeditite\nmedicham\nelectrike\nmanectric\nplusle\nminun\nvolbeat\nillumise\nroselia\ngulpin\nswalot\ncarvanha\nsharpedo\nwailmer\nwailord\nnumel\ncamerupt\ntorkoal\nspoink\ngrumpig\nspinda\ntrapinch\nvibrava\nflygon\ncacnea\ncacturne\nswablu\naltaria\nzangoose\nseviper\nlunatone\nsolrock\nbarboach\nwhiscash\ncorphish\ncrawdaunt\nbaltoy\nclaydol\nlileep\ncradily\nanorith\narmaldo\nfeebas\nmilotic\ncastform\nkecleon\nshuppet\nbanette\nduskull\ndusclops\ntropius\nchimecho\nabsol\nwynaut\nsnorunt\nglalie\nspheal\nsealeo\nwalrein\nclamperl\nhuntail\ngorebyss\nrelicanth\nluvdisc\nbagon\nshelgon\nsalamence\nbeldum\nmetang\nmetagross\nregirock\nregice\nregisteel\nlatias\nlatios\nkyogre\ngroudon\nrayquaza\njirachi\ndeoxys-normal\nturtwig\ngrotle\ntorterra\nchimchar\nmonferno\ninfernape\npiplup\nprinplup\nempoleon\nstarly\nstaravia\nstaraptor\nbidoof\nbibarel\nkricketot\nkricketune\nshinx\nluxio\nluxray\nbudew\nroserade\ncranidos\nrampardos\nshieldon\nbastiodon\nburmy\nwormadam-plant\nmothim\ncombee\nvespiquen\npachirisu\nbuizel\nfloatzel\ncherubi\ncherrim\nshellos\ngastrodon\nambipom\ndrifloon\ndrifblim\nbuneary\nlopunny\nmismagius\nhonchkrow\nglameow\npurugly\nchingling\nstunky\nskuntank\nbronzor\nbronzong\nbonsly\nmime-jr\nhappiny\nchatot\nspiritomb\ngible\ngabite\ngarchomp\nmunchlax\nriolu\nlucario\nhippopotas\nhippowdon\nskorupi\ndrapion\ncroagunk\ntoxicroak\ncarnivine\nfinneon\nlumineon\nmantyke\nsnover\nabomasnow\nweavile\nmagnezone\nlickilicky\nrhyperior\ntangrowth\nelectivire\nmagmortar\ntogekiss\nyanmega\nleafeon\nglaceon\ngliscor\nmamoswine\nporygon-z\ngallade\nprobopass\ndusknoir\nfroslass\nrotom\nuxie\nmesprit\nazelf\ndialga\npalkia\nheatran\nregigigas\ngiratina-altered\ncresselia\nphione\nmanaphy\ndarkrai\nshaymin-land\narceus\nvictini\nsnivy\nservine\nserperior\ntepig\npignite\nemboar\noshawott\ndewott\nsamurott\npatrat\nwatchog\nlillipup\nherdier\nstoutland\npurrloin\nliepard\npansage\nsimisage\npansear\nsimisear\npanpour\nsimipour\nmunna\nmusharna\npidove\ntranquill\nunfezant\nblitzle\nzebstrika\nroggenrola\nboldore\ngigalith\nwoobat\nswoobat\ndrilbur\nexcadrill\naudino\ntimburr\ngurdurr\nconkeldurr\ntympole\npalpitoad\nseismitoad\nthroh\nsawk\nsewaddle\nswadloon\nleavanny\nvenipede\nwhirlipede\nscolipede\ncottonee\nwhimsicott\npetilil\nlilligant\nbasculin-red-striped\nsandile\nkrokorok\nkrookodile\ndarumaka\ndarmanitan-standard\nmaractus\ndwebble\ncrustle\nscraggy\nscrafty\nsigilyph\nyamask\ncofagrigus\ntirtouga\ncarracosta\narchen\narcheops\ntrubbish\ngarbodor\nzorua\nzoroark\nminccino\ncinccino\ngothita\ngothorita\ngothitelle\nsolosis\nduosion\nreuniclus\nducklett\nswanna\nvanillite\nvanillish\nvanilluxe\ndeerling\nsawsbuck\nemolga\nkarrablast\nescavalier\nfoongus\namoonguss\nfrillish\njellicent\nalomomola\njoltik\ngalvantula\nferroseed\nferrothorn\nklink\nklang\nklinklang\ntynamo\neelektrik\neelektross\nelgyem\nbeheeyem\nlitwick\nlampent\nchandelure\naxew\nfraxure\nhaxorus\ncubchoo\nbeartic\ncryogonal\nshelmet\naccelgor\nstunfisk\nmienfoo\nmienshao\ndruddigon\ngolett\ngolurk\npawniard\nbisharp\nbouffalant\nrufflet\nbraviary\nvullaby\nmandibuzz\nheatmor\ndurant\ndeino\nzweilous\nhydreigon\nlarvesta\nvolcarona\ncobalion\nterrakion\nvirizion\ntornadus-incarnate\nthundurus-incarnate\nreshiram\nzekrom\nlandorus-incarnate\nkyurem\nkeldeo-ordinary\nmeloetta-aria\ngenesect\nchespin\nquilladin\nchesnaught\nfennekin\nbraixen\ndelphox\nfroakie\nfrogadier\ngreninja\nbunnelby\ndiggersby\nfletchling\nfletchinder\ntalonflame\nscatterbug\nspewpa\nvivillon\nlitleo\npyroar\nflabebe\nfloette\nflorges\nskiddo\ngogoat\npancham\npangoro\nfurfrou\nespurr\nmeowstic-male\nhonedge\ndoublade\naegislash-shield\nspritzee\naromatisse\nswirlix\nslurpuff\ninkay\nmalamar\nbinacle\nbarbaracle\nskrelp\ndragalge\nclauncher\nclawitzer\nhelioptile\nheliolisk\ntyrunt\ntyrantrum\namaura\naurorus\nsylveon\nhawlucha\ndedenne\ncarbink\ngoomy\nsliggoo\ngoodra\nklefki\nphantump\ntrevenant\npumpkaboo-average\ngourgeist-average\nbergmite\navalugg\nnoibat\nnoivern\nxerneas\nyveltal\nzygarde-50\ndiancie\nhoopa\nvolcanion\nrowlet\ndartrix\ndecidueye\nlitten\ntorracat\nincineroar\npopplio\nbrionne\nprimarina\npikipek\ntrumbeak\ntoucannon\nyungoos\ngumshoos\ngrubbin\ncharjabug\nvikavolt\ncrabrawler\ncrabominable\noricorio-baile\ncutiefly\nribombee\nrockruff\nlycanroc-midday\nwishiwashi-solo\nmareanie\ntoxapex\nmudbray\nmudsdale\ndewpider\naraquanid\nfomantis\nlurantis\nmorelull\nshiinotic\nsalandit\nsalazzle\nstufful\nbewear\nbounsweet\nsteenee\ntsareena\ncomfey\noranguru\npassimian\nwimpod\ngolisopod\nsandygast\npalossand\npyukumuku\ntype-null\nsilvally\nminior-red-meteor\nkomala\nturtonator\ntogedemaru\nmimikyu-disguised\nbruxish\ndrampa\ndhelmise\njangmo-o\nhakamo-o\nkommo-o\ntapu-koko\ntapu-lele\ntapu-bulu\ntapu-fini\ncosmog\ncosmoem\nsolgaleo\nlunala\nnihilego\nbuzzwole\npheromosa\nxurkitree\ncelesteela\nkartana\nguzzlord\nnecrozma\nmagearna\nmarshadow\npoipole\nnaganadel\nstakataka\nblacephalon\nzeraora\nmeltan\nmelmetal\ngrookey\nthwackey\nrillaboom\nscorbunny\nraboot\ncinderace\nsobble\ndrizzile\ninteleon\nskwovet\ngreedent\nrookidee\ncorvisquire\ncorviknight\nblipbug\ndottler\norbeetle\nnickit\nthievul\ngossifleur\neldegoss\nwooloo\ndubwool\nchewtle\ndrednaw\nyamper\nboltund\nrolycoly\ncarkol\ncoalossal\napplin\nflapple\nappletun\nsilicobra\nsandaconda\ncramorant\narrokuda\nbarraskewda\ntoxel\ntoxtricity-amped\nsizzlipede\ncentiskorch\nclobbopus\ngrapploct\nsinistea\npolteageist\nhatenna\nhattrem\nhatterene\nimpidimp\nmorgrem\ngrimmsnarl\nobstagoon\nperrserker\ncursola\nsirfetchd\nmr-rime\nrunerigus\nmilcery\nalcremie\nfalinks\npincurchin\nsnom\nfrosmoth\nstonjourner\neiscue-ice\nindeedee-male\nmorpeko-full-belly\ncufant\ncopperajah\ndracozolt\narctozolt\ndracovish\narctovish\nduraludon\ndreepy\ndrakloak\ndragapult\nzacian\nzamazenta\neternatus\nkubfu\nurshifu-single-strike\nzarude\nregieleki\nregidrago\nglastrier\nspectrier\ncalyrex\nwyrdeer\nkleavor\nursaluna\nbasculegion-male\nsneasler\noverqwil\nenamorus-incarnate\nsprigatito\nfloragato\nmeowscarada\nfuecoco\ncrocalor\nskeledirge\nquaxly\nquaxwell\nquaquaval\nlechonk\noinkologne-male\ntarountula\nspidops\nnymble\nlokix\npawmi\npawmo\npawmot\ntandemaus\nmaushold-family-of-four\nfidough\ndachsbun\nsmoliv\ndolliv\narboliva\nsquawkabilly-green-plumage\nnacli\nnaclstack\ngarganacl\ncharcadet\narmarouge\nceruledge\ntadbulb\nbellibolt\nwattrel\nkilowattrel\nmaschiff\nmabosstiff\nshroodle\ngrafaiai\nbramblin\nbrambleghast\ntoedscool\ntoedscruel\nklawf\ncapsakid\nscovillain\nrellor\nrabsca\nflittle\nespathra\ntinkatink\ntinkatuff\ntinkaton\nwiglett\nwugtrio\nbombirdier\nfinizen\npalafin-zero\nvaroom\nrevavroom\ncyclizar\northworm\nglimmet\nglimmora\ngreavard\nhoundstone\nflamigo\ncetoddle\ncetitan\nveluza\ndondozo\ntatsugiri-curly\nannihilape\nclodsire\nfarigiraf\ndudunsparce-two-segment\nkingambit\ngreat-tusk\nscream-tail\nbrute-bonnet\nflutter-mane\nslither-wing\nsandy-shocks\niron-treads\niron-bundle\niron-hands\niron-jugulis\niron-moth\niron-thorns\nfrigibax\narctibax\nbaxcalibur\ngimmighoul\ngholdengo\nwo-chien\nchien-pao\nting-lu\nchi-yu\nroaring-moon\niron-valiant\nkoraidon\nmiraidon\nwalking-wake\niron-leaves\ndipplin\npoltchageist\nsinistcha\nokidogi\nmunkidori\nfezandipiti\nogerpon\narchaludon\nhydrapple\ngouging-fire\nraging-bolt\niron-boulder\niron-crown\nterapagos\npecharunt\ndeoxys-attack\ndeoxys-defense\ndeoxys-speed\nwormadam-sandy\nwormadam-trash\nshaymin-sky\ngiratina-origin\nrotom-heat\nrotom-wash\nrotom-frost\nrotom-fan\nrotom-mow\ncastform-sunny\ncastform-rainy\ncastform-snowy\nbasculin-blue-striped\ndarmanitan-zen\nmeloetta-pirouette\ntornadus-therian\nthundurus-therian\nlandorus-therian\nkyurem-black\nkyurem-white\nkeldeo-resolute\nmeowstic-female\naegislash-blade\npumpkaboo-small\npumpkaboo-large\npumpkaboo-super\ngourgeist-small\ngourgeist-large\ngourgeist-super\nvenusaur-mega\ncharizard-mega-x\ncharizard-mega-y\nblastoise-mega\nalakazam-mega\ngengar-mega\nkangaskhan-mega\npinsir-mega\ngyarados-mega\naerodactyl-mega\nmewtwo-mega-x\nmewtwo-mega-y\nampharos-mega\nscizor-mega\nheracross-mega\nhoundoom-mega\ntyranitar-mega\nblaziken-mega\ngardevoir-mega\nmawile-mega\naggron-mega\nmedicham-mega\nmanectric-mega\nbanette-mega\nabsol-mega\ngarchomp-mega\nlucario-mega\nabomasnow-mega\nfloette-eternal\nlatias-mega\nlatios-mega\nswampert-mega\nsceptile-mega\nsableye-mega\naltaria-mega\ngallade-mega\naudino-mega\nsharpedo-mega\nslowbro-mega\nsteelix-mega\npidgeot-mega\nglalie-mega\ndiancie-mega\nmetagross-mega\nkyogre-primal\ngroudon-primal\nrayquaza-mega\npikachu-rock-star\npikachu-belle\npikachu-pop-star\npikachu-phd\npikachu-libre\npikachu-cosplay\nhoopa-unbound\ncamerupt-mega\nlopunny-mega\nsalamence-mega\nbeedrill-mega\nrattata-alola\nraticate-alola\nraticate-totem-alola\npikachu-original-cap\npikachu-hoenn-cap\npikachu-sinnoh-cap\npikachu-unova-cap\npikachu-kalos-cap\npikachu-alola-cap\nraichu-alola\nsandshrew-alola\nsandslash-alola\nvulpix-alola\nninetales-alola\ndiglett-alola\ndugtrio-alola\nmeowth-alola\npersian-alola\ngeodude-alola\ngraveler-alola\ngolem-alola\ngrimer-alola\nmuk-alola\nexeggutor-alola\nmarowak-alola\ngreninja-battle-bond\ngreninja-ash\nzygarde-10-power-construct\nzygarde-50-power-construct\nzygarde-complete\ngumshoos-totem\nvikavolt-totem\noricorio-pom-pom\noricorio-pau\noricorio-sensu\nlycanroc-midnight\nwishiwashi-school\nlurantis-totem\nsalazzle-totem\nminior-orange-meteor\nminior-yellow-meteor\nminior-green-meteor\nminior-blue-meteor\nminior-indigo-meteor\nminior-violet-meteor\nminior-red\nminior-orange\nminior-yellow\nminior-green\nminior-blue\nminior-indigo\nminior-violet\nmimikyu-busted\nmimikyu-totem-disguised\nmimikyu-totem-busted\nkommo-o-totem\nmagearna-original\npikachu-partner-cap\nmarowak-totem\nribombee-totem\nrockruff-own-tempo\nlycanroc-dusk\naraquanid-totem\ntogedemaru-totem\nnecrozma-dusk\nnecrozma-dawn\nnecrozma-ultra\npikachu-starter\neevee-starter\npikachu-world-cap\nmeowth-galar\nponyta-galar\nrapidash-galar\nslowpoke-galar\nslowbro-galar\nfarfetchd-galar\nweezing-galar\nmr-mime-galar\narticuno-galar\nzapdos-galar\nmoltres-galar\nslowking-galar\ncorsola-galar\nzigzagoon-galar\nlinoone-galar\ndarumaka-galar\ndarmanitan-galar-standard\ndarmanitan-galar-zen\nyamask-galar\nstunfisk-galar\nzygarde-10\ncramorant-gulping\ncramorant-gorging\ntoxtricity-low-key\neiscue-noice\nindeedee-female\nmorpeko-hangry\nzacian-crowned\nzamazenta-crowned\neternatus-eternamax\nurshifu-rapid-strike\nzarude-dada\ncalyrex-ice\ncalyrex-shadow\nvenusaur-gmax\ncharizard-gmax\nblastoise-gmax\nbutterfree-gmax\npikachu-gmax\nmeowth-gmax\nmachamp-gmax\ngengar-gmax\nkingler-gmax\nlapras-gmax\neevee-gmax\nsnorlax-gmax\ngarbodor-gmax\nmelmetal-gmax\nrillaboom-gmax\ncinderace-gmax\ninteleon-gmax\ncorviknight-gmax\norbeetle-gmax\ndrednaw-gmax\ncoalossal-gmax\nflapple-gmax\nappletun-gmax\nsandaconda-gmax\ntoxtricity-amped-gmax\ncentiskorch-gmax\nhatterene-gmax\ngrimmsnarl-gmax\nalcremie-gmax\ncopperajah-gmax\nduraludon-gmax\nurshifu-single-strike-gmax\nurshifu-rapid-strike-gmax\ntoxtricity-low-key-gmax\ngrowlithe-hisui\narcanine-hisui\nvoltorb-hisui\nelectrode-hisui\ntyphlosion-hisui\nqwilfish-hisui\nsneasel-hisui\nsamurott-hisui\nlilligant-hisui\nzorua-hisui\nzoroark-hisui\nbraviary-hisui\nsliggoo-hisui\ngoodra-hisui\navalugg-hisui\ndecidueye-hisui\ndialga-origin\npalkia-origin\nbasculin-white-striped\nbasculegion-female\nenamorus-therian\ntauros-paldea-combat-breed\ntauros-paldea-blaze-breed\ntauros-paldea-aqua-breed\nwooper-paldea\noinkologne-female\ndudunsparce-three-segment\npalafin-hero\nmaushold-family-of-three\ntatsugiri-droopy\ntatsugiri-stretchy\nsquawkabilly-blue-plumage\nsquawkabilly-yellow-plumage\nsquawkabilly-white-plumage\ngimmighoul-roaming\nkoraidon-limited-build\nkoraidon-sprinting-build\nkoraidon-swimming-build\nkoraidon-gliding-build\nmiraidon-low-power-mode\nmiraidon-drive-mode\nmiraidon-aquatic-mode\nmiraidon-glide-mode\nursaluna-bloodmoon\nogerpon-wellspring-mask\nogerpon-hearthflame-mask\nogerpon-cornerstone-mask\nterapagos-terastal\nterapagos-stellar\nclefable-mega\nvictreebel-mega\nstarmie-mega\ndragonite-mega\nmeganium-mega\nferaligatr-mega\nskarmory-mega\nfroslass-mega\nemboar-mega\nexcadrill-mega\nscolipede-mega\nscrafty-mega\neelektross-mega\nchandelure-mega\nchesnaught-mega\ndelphox-mega\ngreninja-mega\npyroar-mega\nfloette-mega\nmalamar-mega\nbarbaracle-mega\ndragalge-mega\nhawlucha-mega\nzygarde-mega\ndrampa-mega\nfalinks-mega"
   },
   {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#learning-objectives",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#learning-objectives",
-    "title": "Introduction to APIs in Python",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this workshop, you should be able to:\n\nExplain what an API is.\nBe able to use API documentation to explore available API endpoints.\nFetch data from an API using the requests library.\nUnderstand pagination and be able to apply strategies to work with API limits.\nUse, and secure, an API key."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#todays-session",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#todays-session",
-    "title": "Introduction to APIs in Python",
-    "section": "Today’s Session",
-    "text": "Today’s Session\nThis session is a mixture of live-coding and lecture.\n\nPlease mute your microphone 🎙️.\nPlease use the chat 💬 feature to ask questions during the session.\nWe will have breaks every 50 minutes ☕.\nWe will update codeshare.io/apis-in-python during the live coding portion.\nAt the end of today’s session, please complete a short survey: bit.ly/apis-in-python-survey"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#ways-of-accessing-data",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#ways-of-accessing-data",
-    "title": "Introduction to APIs in Python",
-    "section": "Ways of accessing data",
-    "text": "Ways of accessing data\n. . .\n\n\n\nManual\n\nDownload files from the web (CSV, Excel, Text, Parquet, etc.)\nCopy manually from websites (tables, charts, text)\nExtract data from documents (Word or PDFs)\n\n\n\n\nAutomatic\n\nDatabases\nAPIs\nWeb Scraping (Extract information from web pages programmatically)\nSensors"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#why-use-an-api",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#why-use-an-api",
-    "title": "Introduction to APIs in Python",
-    "section": "Why use an API?",
-    "text": "Why use an API?\n\nYou need the most up-to-date information.\nYou don’t need everything - you can ask for exactly what you want.\nIt’s repeatable - you can write code once, and reuse everytime you need new data."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-an-api",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-an-api",
-    "title": "Introduction to APIs in Python",
-    "section": "What is an API?",
-    "text": "What is an API?\n. . .\nAPI stands for:\nApplication Programming Interface\n. . .\nAn API provides a way to communicate between your computer (the client) and a remote web service (the server).\n. . ."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-get-cooking",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-get-cooking",
-    "title": "Introduction to APIs in Python",
-    "section": "Lets get cooking 🌶️",
-    "text": "Lets get cooking 🌶️\n. . .\nYou go to a restaurant.\n. . .\nRather than waiting to be seated you poke your head into the kitchen, and ask for a grilled cheese sandwich.\n. . .\nThe chef promptly throws a spatula at your head. Now you have nothing to show for your effort but a head injury."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-1",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-1",
-    "title": "Introduction to APIs in Python",
-    "section": "",
-    "text": "What went wrong?\n. . .\nYou need someone to translate your request in a way the chef understands!\n. . .\nYou need an API!"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-2",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-2",
-    "title": "Introduction to APIs in Python",
-    "section": "",
-    "text": "Let’s try this again.\n. . .\nYou (the client) enter the restaurant and are seated.\n. . .\nA waiter (the API) arrives to take your order. You ask for a grilled cheese, extra cheese, with tomato. The waiter notes your order on a slip of paper (the request), which he posts on the turnstile at the kitchen.\n. . .\nThe chef (server) reviews the request’s instructions, prepares a grilled cheese sandwich , and places it on the kitchen window, and hit’s a bell.\n. . .\nYour server, hearing the bell, brings you the grilled cheese sandwhich (the response), along with an apology from the chef for the head injury."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-3",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-3",
-    "title": "Introduction to APIs in Python",
-    "section": "",
-    "text": "Client: Requests grilled cheese\nAPI: Receives request and delivers to kitchen\nServer: Reviews request and generates response (grilled cheese)\nAPI: delivers response to client"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#types-of-apis",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#types-of-apis",
-    "title": "Introduction to APIs in Python",
-    "section": "Types of APIs",
-    "text": "Types of APIs\n. . .\nSOAP (legacy): XML-based, structured, rigid (common in banking/healthcare)\n. . .\nREST (modern): Flexible, human-readable, usually returns JSON."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#requests",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#requests",
-    "title": "Introduction to APIs in Python",
-    "section": "Requests",
-    "text": "Requests\nWhen you want data from an API, you send a request. This request contains:\n\nThe name of the resource you would like to access (data)\nA verb indicating what you want to do with the data."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#rest-and-http-methods",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#rest-and-http-methods",
-    "title": "Introduction to APIs in Python",
-    "section": "REST and HTTP Methods",
-    "text": "REST and HTTP Methods\nCommon verbs in Rest APIs:\n\nGet: Retreive data (most common)\nPost: Create data\nPut: Update data\nDelete: Remove data\n\n. . .\nFor data retrieval, we use GET.\n. . .\nExample:\nGET https://pokeapi.co/api/v2/pokemon?limit=3&offset=0"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-request-structure",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-request-structure",
-    "title": "Introduction to APIs in Python",
-    "section": "API Request Structure",
-    "text": "API Request Structure\nA typical API request has four main parts:\n\nHTTP Verb: what we are doing GET\nBase URL: main address https://pokeapi.co/api/v2\nEndpoint: the specific resource we are acting on /pokemon\nQuery Parameters: optional filters\n?limit=3&offset=10\n\n. . .\nFull request:\nGET https://pokeapi.co/api/v2/pokemon?limit=3&offset=10"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#structure-of-an-api-response",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#structure-of-an-api-response",
-    "title": "Introduction to APIs in Python",
-    "section": "Structure of an API Response",
-    "text": "Structure of an API Response\nEach API response is composed of two parts:\n. . .\nheader: information about the data (metadata)\n. . .\nbody: the data (usually JSON)"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-4",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-4",
-    "title": "Introduction to APIs in Python",
-    "section": "",
-    "text": "Think of an API response like an envelope you received in the mail.\n. . ."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-5",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-5",
-    "title": "Introduction to APIs in Python",
-    "section": "",
-    "text": "On the outside of the envelope there is information like:\n\nThe address it was addressed to\nThe address where it came from\nThe postage date, which indicates when it was posted\n\n. . .\nThis metadata, or “data about data”, tells you about the letter contained within — who sent it, to whom, and when?.\n. . .\nIn an API response this is the API header. It contains information about the data being delivered.\n. . .\nThe body of the API contains the actual contents of the letter (the data). These data are most commonly delivered as a JSON."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-json",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#what-is-json",
-    "title": "Introduction to APIs in Python",
-    "section": "What is JSON?",
-    "text": "What is JSON?\nJSON stands for JavaScript Object Notation.\n. . .\nIt’s the most common format for data exchanged through APIs.\n. . .\nThink of JSON as a structured way of storing key–value pairs, like a list or dictionary in R or Python."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#json-structure",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#json-structure",
-    "title": "Introduction to APIs in Python",
-    "section": "JSON Structure",
-    "text": "JSON Structure\nJSON objects are made of:\n\nKeys (the name of a data field)\nValues (the data associated with that key)\n\n. . .\n{\n  \"name\": \"Pikachu\",\n  \"height\": 4,\n  \"weight\": 60,\n  \"abilities\": [\"static\", \"lightning-rod\"]\n}"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#status-code",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#status-code",
-    "title": "Introduction to APIs in Python",
-    "section": "Status Code",
-    "text": "Status Code\nThe status code tells you whether the request succeeded or failed\n. . .\n\n\n\n\n\n\n\n\nCode\nMeaning\nDescription\n\n\n\n\n200\n✅ OK\nThe request succeeded and data is returned.\n\n\n201\n🆕 Created\nA new resource was successfully created.\n\n\n400\n⚠️ Bad Request\nThe request was malformed or invalid.\n\n\n401\n🔐 Unauthorized\nMissing or invalid API key.\n\n\n403\n🚫 Forbidden\nYou don’t have permission to access the resource.\n\n\n404\n❓ Not Found\nThe endpoint or item doesn’t exist.\n\n\n429\n🕐 Too Many Requests\nYou’ve hit the API’s rate limit.\n\n\n500\n💥 Server Error\nSomething went wrong on the server side."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints",
-    "title": "Introduction to APIs in Python",
-    "section": "API Endpoints",
-    "text": "API Endpoints\nAn API endpoint is a gateway where data is sent and received.\nIn RESTful web APIs, this corresponds to a URL.\n. . .\nhttps://pokeapi.co/api/v2/"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints-1",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-endpoints-1",
-    "title": "Introduction to APIs in Python",
-    "section": "API Endpoints",
-    "text": "API Endpoints\nAn API endpoint is a gateway where data is sent and received.\nIn RESTful web APIs, this corresponds to a URL.\nhttps://pokeapi.co/api/v2/{endpoint}"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-documentation",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-documentation",
-    "title": "Introduction to APIs in Python",
-    "section": "API Documentation",
-    "text": "API Documentation\nhttps://pokeapi.co/docs/v2#pokemon-section"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#abilities",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#abilities",
-    "title": "Introduction to APIs in Python",
-    "section": "Abilities",
-    "text": "Abilities\nAbilities provide passive effects for Pokémon in battle or in the overworld.\n. . .\nGET https://pokeapi.co/api/v2/ability\n. . .\n. . .\n{\n  \"count\": 367,\n  \"next\": \"https://pokeapi.co/api/v2/ability/?offset=20&limit=20\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"name\": \"stench\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/1/\"\n    },\n    {\n      \"name\": \"drizzle\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/2/\"\n    },\n    {\n      \"name\": \"speed-boost\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/3/\"\n    },\n    {\n      \"name\": \"battle-armor\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/4/\"\n    },\n    {\n      \"name\": \"sturdy\",\n      \"url\": \"https://pokeapi.co/api/v2/ability/5/\"\n    },"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#item",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#item",
-    "title": "Introduction to APIs in Python",
-    "section": "Item",
-    "text": "Item\nAn item is an object in the games which the player can pick up, keep in their bag, and use in some manner. They have various uses, including healing, powering up, helping catch Pokémon, or to access a new area.\n. . .\nGET https://pokeapi.co/api/v2/item\n. . .\n{\n  \"count\": 2180,\n  \"next\": \"https://pokeapi.co/api/v2/item/?offset=20&limit=20\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"name\": \"master-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/1/\"\n    },\n    {\n      \"name\": \"ultra-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/2/\"\n    },\n    {\n      \"name\": \"great-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/3/\"\n    },\n    {\n      \"name\": \"poke-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/4/\"\n    },\n    {\n      \"name\": \"safari-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/5/\"\n    },\n    {\n      \"name\": \"net-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/6/\"\n    },\n    {\n      \"name\": \"dive-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/7/\"\n    },\n    {\n      \"name\": \"nest-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/8/\"\n    },\n    {\n      \"name\": \"repeat-ball\",\n      \"url\": \"https://pokeapi.co/api/v2/item/9/\""
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#pagination",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#pagination",
-    "title": "Introduction to APIs in Python",
-    "section": "Pagination 📄",
-    "text": "Pagination 📄\nMany APIs return only part of the dataset at once.\n. . .\nAddditionally, APIs often enact limits on the number of results that can be returned over a given time period.\n. . .\nWhich parts of the dataset are returned are controlled by two parameters:\n. . .\nlimit: how many records to return\n. . .\noffset: how many records to skip\n. . .\nTo get all results, you can loop over offsets:\n. . .\nhttps://pokeapi.co/api/v2/item/?offset=20&limit=20"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key",
-    "title": "Introduction to APIs in Python",
-    "section": "API Key 🔑",
-    "text": "API Key 🔑\n. . .\nMany APIs require something called an API Key\n. . .\nAn API key is a unique code used to identify and authenticate a user or application when interacting with an API.\n. . .\nAPI keys are generally a string of alphanumeric characters, and look something like this:\n. . .\nzaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx\n. . .\nAPI keys are a security measure to make sure you, or your application, are who you say you are."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key-1",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#api-key-1",
-    "title": "Introduction to APIs in Python",
-    "section": "API Key 🔑",
-    "text": "API Key 🔑\nAn API key is like an ID card. You wouldn’t leave your ID card laying around. Anyone could just pick it up and pretend they are you!\n. . .\nIf you store plaintext API keys in code and share it (e.g., on GitHub), anyone with access can read it!\n. . .\nimport requests\n\nAPI_KEY = 'zaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtl'\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nrequests.get(path_url, params=params)"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#how-do-we-protect-our-api-keys",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#how-do-we-protect-our-api-keys",
-    "title": "Introduction to APIs in Python",
-    "section": "How do we protect our API keys?",
-    "text": "How do we protect our API keys?"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables",
-    "title": "Introduction to APIs in Python",
-    "section": "Environment Variables",
-    "text": "Environment Variables\nA variable allows us to store information, and an environment is the system we execute our code on.\n. . .\nEnvironment variables allow us to store information specific to a system in variables.\n. . .\nEnvironment variables are not stored within our codebase, but are instead stored in a system specific configuration file.\n. . .\nWe can use the environment variables configuration file to store our API key, and reference the configuration file in our code in order to load the API key."
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables-in-r",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#environment-variables-in-r",
-    "title": "Introduction to APIs in Python",
-    "section": "Environment Variables in R",
-    "text": "Environment Variables in R\nIn Python, environment variables can be stored in a text file .env with name-value pairs.\n. . .\nWe can then edit that file, using our editor of choice:\necho API_KEY=zaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx &gt; .env"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-7",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#section-7",
-    "title": "Introduction to APIs in Python",
-    "section": "",
-    "text": "Now we can update our code to retrieve our API environment variable:\n\nimport requests\nfrom dotenv import load_dotenv\nimport os\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\nAPI_KEY = os.environ.get('API_KEY')\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nrequests.get(path_url, params=params)"
-  },
-  {
-    "objectID": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-give-it-a-try",
-    "href": "PresentationMaterials/Introduction-to-APIs-in-Python.html#lets-give-it-a-try",
-    "title": "Introduction to APIs in Python",
-    "section": "Let’s give it a try!",
-    "text": "Let’s give it a try!"
-  },
-  {
     "objectID": "Introduction-to-APIs-in-Python-Tutorial.html#navigating-data",
     "href": "Introduction-to-APIs-in-Python-Tutorial.html#navigating-data",
     "title": "Introduction to APIs in Python Tutorial",
@@ -277,13 +501,13 @@
     "href": "Introduction-to-APIs-in-Python-Tutorial.html#api-parameters",
     "title": "Introduction to APIs in Python Tutorial",
     "section": "API parameters",
-    "text": "API parameters\nLet’s move to a new API to explore another way of selecting and filtering data via API – parameters.\nAPI parameters allow us to specify subsets or constraints for the data we are requesting. We saw two parameters in the pokeapi: offset and limit. Otherwise, we controlled most other data selections by constructing URLs using our endpoints of interest. Other APIs, as we will see soon, rely much more heavily on parameters to provide a means of selecting specific data.\nLet’s use the https://open-meteo.com/ API. Open-Meteo is an open-source weather API.\nFirst let’s setup our base url and endpoint. We will be using the forecast endpoint to get a forecast for the weather in Baltimore, MD.\n\nBASE_URL = \"https://api.open-meteo.com/v1/\"\nendpoint = 'forecast'\nurl_path = f'{BASE_URL}{endpoint}'\n\nTo specify our parameters, we create a dictionary, with key-value pairs.\nThe Open-Meteo API uses longitude and latitude to specify location.\nThe longitude for Baltimore is 39.3 The latitude for Baltimore is -76.61\nWe would like to get data on the forecast in Baltimore, both temperature (in fahrenheit) and projected rain.\n\nparams = {\n    \"latitude\": 39.3,\n    \"longitude\": -76.61,\n    \"hourly\": [\"temperature_2m\", \"rain\"],\n    \"temperature_unit\": \"fahrenheit\",\n}\n\nSome things to note:\n\nLatitude and longitude are provided as decimal values\nHourly indicates we want hourly data on the provided variables. Since we have two (temperature and rain) we provide them as a list.\ntemperature_2m means the temperature at 2 meters off the ground, roughly where an adult human might experience the weather.\n\nNow we can construct our request, using the new params that we defined:\n\nresponse = requests.get(url=url_path, params=params)\ndata = response.json()\npprint.pprint(data)\n\n\n\n\n{'elevation': 16.0,\n 'generationtime_ms': 0.12445449829101562,\n 'hourly': {'rain': [0.1,\n                     0.8,\n                     0.7,\n                     0.4,\n                     0.5,\n                     1.6,\n                     0.7,\n                     0.2,\n                     1.8,\n                     1.2,\n                     0.3,\n                     0.1,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.1,\n                     0.2,\n                     0.1,\n                     0.0,\n                     1.2,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.1,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.1,\n                     0.1,\n                     0.1,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0],\n            'temperature_2m': [45.3,\n                               42.9,\n                               42.0,\n                               41.4,\n                               41.1,\n                               41.8,\n                               42.4,\n                               42.9,\n                               42.7,\n                               42.9,\n                               42.8,\n                               42.3,\n                               43.1,\n                               43.7,\n                               44.1,\n                               44.7,\n                               45.1,\n                               46.4,\n                               46.4,\n                               47.1,\n                               46.5,\n                               45.9,\n                               44.9,\n                               44.6,\n                               44.4,\n                               44.1,\n                               42.6,\n                               42.3,\n                               41.3,\n                               41.1,\n                               39.6,\n                               38.4,\n                               39.0,\n                               40.3,\n                               40.9,\n                               39.7,\n                               40.5,\n                               41.6,\n                               43.3,\n                               44.9,\n                               45.5,\n                               45.9,\n                               46.0,\n                               45.8,\n                               46.0,\n                               46.0,\n                               45.8,\n                               45.6,\n                               45.5,\n                               45.6,\n                               45.4,\n                               45.3,\n                               45.2,\n                               45.1,\n                               44.9,\n                               44.8,\n                               44.9,\n                               44.9,\n                               44.9,\n                               45.0,\n                               45.2,\n                               46.4,\n                               48.6,\n                               50.8,\n                               53.0,\n                               55.0,\n                               56.8,\n                               58.0,\n                               58.0,\n                               57.0,\n                               56.3,\n                               55.7,\n                               54.5,\n                               55.0,\n                               54.9,\n                               54.9,\n                               55.0,\n                               55.4,\n                               56.7,\n                               57.2,\n                               57.2,\n                               57.9,\n                               57.0,\n                               56.1,\n                               55.5,\n                               55.2,\n                               54.7,\n                               53.4,\n                               53.2,\n                               52.0,\n                               52.1,\n                               54.3,\n                               53.7,\n                               52.5,\n                               50.6,\n                               49.2,\n                               47.7,\n                               46.4,\n                               45.4,\n                               44.6,\n                               44.0,\n                               43.4,\n                               42.8,\n                               42.5,\n                               42.2,\n                               41.9,\n                               41.7,\n                               41.5,\n                               41.2,\n                               42.4,\n                               44.8,\n                               47.4,\n                               50.0,\n                               52.2,\n                               54.0,\n                               55.2,\n                               55.8,\n                               54.9,\n                               52.3,\n                               51.1,\n                               50.1,\n                               49.5,\n                               48.9,\n                               48.3,\n                               47.9,\n                               47.2,\n                               46.8,\n                               46.3,\n                               46.0,\n                               45.6,\n                               45.2,\n                               44.9,\n                               45.3,\n                               46.8,\n                               49.1,\n                               51.6,\n                               54.2,\n                               57.0,\n                               58.8,\n                               59.4,\n                               59.0,\n                               58.4,\n                               57.4,\n                               56.1,\n                               55.2,\n                               54.9,\n                               54.9,\n                               54.9,\n                               54.9,\n                               54.9,\n                               54.8,\n                               54.6,\n                               54.4,\n                               54.1,\n                               53.5,\n                               52.9,\n                               52.4,\n                               52.1,\n                               52.0,\n                               51.8,\n                               51.5,\n                               51.0,\n                               50.7,\n                               50.6,\n                               50.5,\n                               50.5,\n                               50.4,\n                               50.3],\n            'time': ['2025-11-19T00:00',\n                     '2025-11-19T01:00',\n                     '2025-11-19T02:00',\n                     '2025-11-19T03:00',\n                     '2025-11-19T04:00',\n                     '2025-11-19T05:00',\n                     '2025-11-19T06:00',\n                     '2025-11-19T07:00',\n                     '2025-11-19T08:00',\n                     '2025-11-19T09:00',\n                     '2025-11-19T10:00',\n                     '2025-11-19T11:00',\n                     '2025-11-19T12:00',\n                     '2025-11-19T13:00',\n                     '2025-11-19T14:00',\n                     '2025-11-19T15:00',\n                     '2025-11-19T16:00',\n                     '2025-11-19T17:00',\n                     '2025-11-19T18:00',\n                     '2025-11-19T19:00',\n                     '2025-11-19T20:00',\n                     '2025-11-19T21:00',\n                     '2025-11-19T22:00',\n                     '2025-11-19T23:00',\n                     '2025-11-20T00:00',\n                     '2025-11-20T01:00',\n                     '2025-11-20T02:00',\n                     '2025-11-20T03:00',\n                     '2025-11-20T04:00',\n                     '2025-11-20T05:00',\n                     '2025-11-20T06:00',\n                     '2025-11-20T07:00',\n                     '2025-11-20T08:00',\n                     '2025-11-20T09:00',\n                     '2025-11-20T10:00',\n                     '2025-11-20T11:00',\n                     '2025-11-20T12:00',\n                     '2025-11-20T13:00',\n                     '2025-11-20T14:00',\n                     '2025-11-20T15:00',\n                     '2025-11-20T16:00',\n                     '2025-11-20T17:00',\n                     '2025-11-20T18:00',\n                     '2025-11-20T19:00',\n                     '2025-11-20T20:00',\n                     '2025-11-20T21:00',\n                     '2025-11-20T22:00',\n                     '2025-11-20T23:00',\n                     '2025-11-21T00:00',\n                     '2025-11-21T01:00',\n                     '2025-11-21T02:00',\n                     '2025-11-21T03:00',\n                     '2025-11-21T04:00',\n                     '2025-11-21T05:00',\n                     '2025-11-21T06:00',\n                     '2025-11-21T07:00',\n                     '2025-11-21T08:00',\n                     '2025-11-21T09:00',\n                     '2025-11-21T10:00',\n                     '2025-11-21T11:00',\n                     '2025-11-21T12:00',\n                     '2025-11-21T13:00',\n                     '2025-11-21T14:00',\n                     '2025-11-21T15:00',\n                     '2025-11-21T16:00',\n                     '2025-11-21T17:00',\n                     '2025-11-21T18:00',\n                     '2025-11-21T19:00',\n                     '2025-11-21T20:00',\n                     '2025-11-21T21:00',\n                     '2025-11-21T22:00',\n                     '2025-11-21T23:00',\n                     '2025-11-22T00:00',\n                     '2025-11-22T01:00',\n                     '2025-11-22T02:00',\n                     '2025-11-22T03:00',\n                     '2025-11-22T04:00',\n                     '2025-11-22T05:00',\n                     '2025-11-22T06:00',\n                     '2025-11-22T07:00',\n                     '2025-11-22T08:00',\n                     '2025-11-22T09:00',\n                     '2025-11-22T10:00',\n                     '2025-11-22T11:00',\n                     '2025-11-22T12:00',\n                     '2025-11-22T13:00',\n                     '2025-11-22T14:00',\n                     '2025-11-22T15:00',\n                     '2025-11-22T16:00',\n                     '2025-11-22T17:00',\n                     '2025-11-22T18:00',\n                     '2025-11-22T19:00',\n                     '2025-11-22T20:00',\n                     '2025-11-22T21:00',\n                     '2025-11-22T22:00',\n                     '2025-11-22T23:00',\n                     '2025-11-23T00:00',\n                     '2025-11-23T01:00',\n                     '2025-11-23T02:00',\n                     '2025-11-23T03:00',\n                     '2025-11-23T04:00',\n                     '2025-11-23T05:00',\n                     '2025-11-23T06:00',\n                     '2025-11-23T07:00',\n                     '2025-11-23T08:00',\n                     '2025-11-23T09:00',\n                     '2025-11-23T10:00',\n                     '2025-11-23T11:00',\n                     '2025-11-23T12:00',\n                     '2025-11-23T13:00',\n                     '2025-11-23T14:00',\n                     '2025-11-23T15:00',\n                     '2025-11-23T16:00',\n                     '2025-11-23T17:00',\n                     '2025-11-23T18:00',\n                     '2025-11-23T19:00',\n                     '2025-11-23T20:00',\n                     '2025-11-23T21:00',\n                     '2025-11-23T22:00',\n                     '2025-11-23T23:00',\n                     '2025-11-24T00:00',\n                     '2025-11-24T01:00',\n                     '2025-11-24T02:00',\n                     '2025-11-24T03:00',\n                     '2025-11-24T04:00',\n                     '2025-11-24T05:00',\n                     '2025-11-24T06:00',\n                     '2025-11-24T07:00',\n                     '2025-11-24T08:00',\n                     '2025-11-24T09:00',\n                     '2025-11-24T10:00',\n                     '2025-11-24T11:00',\n                     '2025-11-24T12:00',\n                     '2025-11-24T13:00',\n                     '2025-11-24T14:00',\n                     '2025-11-24T15:00',\n                     '2025-11-24T16:00',\n                     '2025-11-24T17:00',\n                     '2025-11-24T18:00',\n                     '2025-11-24T19:00',\n                     '2025-11-24T20:00',\n                     '2025-11-24T21:00',\n                     '2025-11-24T22:00',\n                     '2025-11-24T23:00',\n                     '2025-11-25T00:00',\n                     '2025-11-25T01:00',\n                     '2025-11-25T02:00',\n                     '2025-11-25T03:00',\n                     '2025-11-25T04:00',\n                     '2025-11-25T05:00',\n                     '2025-11-25T06:00',\n                     '2025-11-25T07:00',\n                     '2025-11-25T08:00',\n                     '2025-11-25T09:00',\n                     '2025-11-25T10:00',\n                     '2025-11-25T11:00',\n                     '2025-11-25T12:00',\n                     '2025-11-25T13:00',\n                     '2025-11-25T14:00',\n                     '2025-11-25T15:00',\n                     '2025-11-25T16:00',\n                     '2025-11-25T17:00',\n                     '2025-11-25T18:00',\n                     '2025-11-25T19:00',\n                     '2025-11-25T20:00',\n                     '2025-11-25T21:00',\n                     '2025-11-25T22:00',\n                     '2025-11-25T23:00']},\n 'hourly_units': {'rain': 'mm', 'temperature_2m': '°F', 'time': 'iso8601'},\n 'latitude': 39.289543,\n 'longitude': -76.62448,\n 'timezone': 'GMT',\n 'timezone_abbreviation': 'GMT',\n 'utc_offset_seconds': 0}\n\n\n\nWe can extract data into a Pandas dataframe easily:\n\nimport pandas as pd\ntimes = data[\"hourly\"][\"time\"]\ntemps = data[\"hourly\"][\"temperature_2m\"]\nrain = data[\"hourly\"][\"rain\"]\n\ndf = pd.DataFrame({\n    \"Time\": pd.to_datetime(times),\n    \"Temp\": temps,\n    \"Rain\": rain\n})\nprint(df)\n\n                   Time  Temp  Rain\n0   2025-11-19 00:00:00  45.3   0.1\n1   2025-11-19 01:00:00  42.9   0.8\n2   2025-11-19 02:00:00  42.0   0.7\n3   2025-11-19 03:00:00  41.4   0.4\n4   2025-11-19 04:00:00  41.1   0.5\n..                  ...   ...   ...\n163 2025-11-25 19:00:00  50.6   0.0\n164 2025-11-25 20:00:00  50.5   0.0\n165 2025-11-25 21:00:00  50.5   0.0\n166 2025-11-25 22:00:00  50.4   0.0\n167 2025-11-25 23:00:00  50.3   0.0\n\n[168 rows x 3 columns]"
+    "text": "API parameters\nLet’s move to a new API to explore another way of selecting and filtering data via API – parameters.\nAPI parameters allow us to specify subsets or constraints for the data we are requesting. We saw two parameters in the pokeapi: offset and limit. Otherwise, we controlled most other data selections by constructing URLs using our endpoints of interest. Other APIs, as we will see soon, rely much more heavily on parameters to provide a means of selecting specific data.\nLet’s use the https://open-meteo.com/ API. Open-Meteo is an open-source weather API.\nFirst let’s setup our base url and endpoint. We will be using the forecast endpoint to get a forecast for the weather in Baltimore, MD.\n\nBASE_URL = \"https://api.open-meteo.com/v1/\"\nendpoint = 'forecast'\nurl_path = f'{BASE_URL}{endpoint}'\n\nTo specify our parameters, we create a dictionary, with key-value pairs.\nThe Open-Meteo API uses longitude and latitude to specify location.\nThe longitude for Baltimore is 39.3 The latitude for Baltimore is -76.61\nWe would like to get data on the forecast in Baltimore, both temperature (in fahrenheit) and projected rain.\n\nparams = {\n    \"latitude\": 39.3,\n    \"longitude\": -76.61,\n    \"hourly\": [\"temperature_2m\", \"rain\"],\n    \"temperature_unit\": \"fahrenheit\",\n}\n\nSome things to note:\n\nLatitude and longitude are provided as decimal values\nHourly indicates we want hourly data on the provided variables. Since we have two (temperature and rain) we provide them as a list.\ntemperature_2m means the temperature at 2 meters off the ground, roughly where an adult human might experience the weather.\n\nNow we can construct our request, using the new params that we defined:\n\nresponse = requests.get(url=url_path, params=params)\ndata = response.json()\npprint.pprint(data)\n\n\n\n\n{'elevation': 16.0,\n 'generationtime_ms': 0.09822845458984375,\n 'hourly': {'rain': [0.1,\n                     0.8,\n                     0.7,\n                     0.4,\n                     0.5,\n                     1.6,\n                     0.7,\n                     0.2,\n                     1.8,\n                     1.2,\n                     0.3,\n                     0.1,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.1,\n                     0.2,\n                     0.1,\n                     0.0,\n                     1.2,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.1,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.1,\n                     0.1,\n                     0.1,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0,\n                     0.0],\n            'temperature_2m': [45.3,\n                               42.9,\n                               42.0,\n                               41.4,\n                               41.1,\n                               41.8,\n                               42.4,\n                               42.9,\n                               42.7,\n                               42.9,\n                               42.8,\n                               42.3,\n                               43.1,\n                               43.7,\n                               44.1,\n                               44.7,\n                               45.4,\n                               46.3,\n                               45.7,\n                               45.9,\n                               46.5,\n                               45.4,\n                               44.7,\n                               43.6,\n                               42.9,\n                               43.1,\n                               41.8,\n                               40.4,\n                               39.7,\n                               38.8,\n                               38.2,\n                               37.4,\n                               36.6,\n                               36.5,\n                               36.4,\n                               38.2,\n                               40.5,\n                               41.6,\n                               43.3,\n                               44.9,\n                               45.5,\n                               45.9,\n                               46.0,\n                               45.8,\n                               46.0,\n                               46.0,\n                               45.8,\n                               45.6,\n                               45.5,\n                               45.6,\n                               45.4,\n                               45.3,\n                               45.2,\n                               45.1,\n                               44.9,\n                               44.8,\n                               44.9,\n                               44.9,\n                               44.9,\n                               45.0,\n                               45.2,\n                               46.4,\n                               48.6,\n                               50.8,\n                               53.0,\n                               55.0,\n                               56.8,\n                               58.0,\n                               58.0,\n                               57.0,\n                               56.3,\n                               55.7,\n                               54.5,\n                               55.0,\n                               54.9,\n                               54.9,\n                               55.0,\n                               55.4,\n                               56.7,\n                               57.2,\n                               57.2,\n                               57.9,\n                               57.0,\n                               56.1,\n                               55.5,\n                               55.2,\n                               54.7,\n                               53.4,\n                               53.2,\n                               52.0,\n                               52.1,\n                               54.3,\n                               53.7,\n                               52.5,\n                               50.6,\n                               49.2,\n                               47.7,\n                               46.4,\n                               45.4,\n                               44.6,\n                               44.0,\n                               43.4,\n                               42.8,\n                               42.5,\n                               42.2,\n                               41.9,\n                               41.7,\n                               41.5,\n                               41.2,\n                               42.4,\n                               44.8,\n                               47.4,\n                               50.0,\n                               52.2,\n                               54.0,\n                               55.2,\n                               55.8,\n                               54.9,\n                               52.3,\n                               51.1,\n                               50.1,\n                               49.5,\n                               48.9,\n                               48.3,\n                               47.9,\n                               47.2,\n                               46.8,\n                               46.3,\n                               46.0,\n                               45.6,\n                               45.2,\n                               44.9,\n                               45.3,\n                               46.8,\n                               49.1,\n                               51.6,\n                               54.2,\n                               57.0,\n                               58.8,\n                               59.4,\n                               59.0,\n                               58.4,\n                               57.4,\n                               56.1,\n                               55.2,\n                               54.9,\n                               54.9,\n                               54.9,\n                               54.9,\n                               54.9,\n                               54.8,\n                               54.6,\n                               54.4,\n                               54.1,\n                               53.5,\n                               52.9,\n                               52.4,\n                               52.1,\n                               52.0,\n                               51.8,\n                               51.5,\n                               51.0,\n                               50.7,\n                               50.6,\n                               50.5,\n                               50.5,\n                               50.4,\n                               50.3],\n            'time': ['2025-11-19T00:00',\n                     '2025-11-19T01:00',\n                     '2025-11-19T02:00',\n                     '2025-11-19T03:00',\n                     '2025-11-19T04:00',\n                     '2025-11-19T05:00',\n                     '2025-11-19T06:00',\n                     '2025-11-19T07:00',\n                     '2025-11-19T08:00',\n                     '2025-11-19T09:00',\n                     '2025-11-19T10:00',\n                     '2025-11-19T11:00',\n                     '2025-11-19T12:00',\n                     '2025-11-19T13:00',\n                     '2025-11-19T14:00',\n                     '2025-11-19T15:00',\n                     '2025-11-19T16:00',\n                     '2025-11-19T17:00',\n                     '2025-11-19T18:00',\n                     '2025-11-19T19:00',\n                     '2025-11-19T20:00',\n                     '2025-11-19T21:00',\n                     '2025-11-19T22:00',\n                     '2025-11-19T23:00',\n                     '2025-11-20T00:00',\n                     '2025-11-20T01:00',\n                     '2025-11-20T02:00',\n                     '2025-11-20T03:00',\n                     '2025-11-20T04:00',\n                     '2025-11-20T05:00',\n                     '2025-11-20T06:00',\n                     '2025-11-20T07:00',\n                     '2025-11-20T08:00',\n                     '2025-11-20T09:00',\n                     '2025-11-20T10:00',\n                     '2025-11-20T11:00',\n                     '2025-11-20T12:00',\n                     '2025-11-20T13:00',\n                     '2025-11-20T14:00',\n                     '2025-11-20T15:00',\n                     '2025-11-20T16:00',\n                     '2025-11-20T17:00',\n                     '2025-11-20T18:00',\n                     '2025-11-20T19:00',\n                     '2025-11-20T20:00',\n                     '2025-11-20T21:00',\n                     '2025-11-20T22:00',\n                     '2025-11-20T23:00',\n                     '2025-11-21T00:00',\n                     '2025-11-21T01:00',\n                     '2025-11-21T02:00',\n                     '2025-11-21T03:00',\n                     '2025-11-21T04:00',\n                     '2025-11-21T05:00',\n                     '2025-11-21T06:00',\n                     '2025-11-21T07:00',\n                     '2025-11-21T08:00',\n                     '2025-11-21T09:00',\n                     '2025-11-21T10:00',\n                     '2025-11-21T11:00',\n                     '2025-11-21T12:00',\n                     '2025-11-21T13:00',\n                     '2025-11-21T14:00',\n                     '2025-11-21T15:00',\n                     '2025-11-21T16:00',\n                     '2025-11-21T17:00',\n                     '2025-11-21T18:00',\n                     '2025-11-21T19:00',\n                     '2025-11-21T20:00',\n                     '2025-11-21T21:00',\n                     '2025-11-21T22:00',\n                     '2025-11-21T23:00',\n                     '2025-11-22T00:00',\n                     '2025-11-22T01:00',\n                     '2025-11-22T02:00',\n                     '2025-11-22T03:00',\n                     '2025-11-22T04:00',\n                     '2025-11-22T05:00',\n                     '2025-11-22T06:00',\n                     '2025-11-22T07:00',\n                     '2025-11-22T08:00',\n                     '2025-11-22T09:00',\n                     '2025-11-22T10:00',\n                     '2025-11-22T11:00',\n                     '2025-11-22T12:00',\n                     '2025-11-22T13:00',\n                     '2025-11-22T14:00',\n                     '2025-11-22T15:00',\n                     '2025-11-22T16:00',\n                     '2025-11-22T17:00',\n                     '2025-11-22T18:00',\n                     '2025-11-22T19:00',\n                     '2025-11-22T20:00',\n                     '2025-11-22T21:00',\n                     '2025-11-22T22:00',\n                     '2025-11-22T23:00',\n                     '2025-11-23T00:00',\n                     '2025-11-23T01:00',\n                     '2025-11-23T02:00',\n                     '2025-11-23T03:00',\n                     '2025-11-23T04:00',\n                     '2025-11-23T05:00',\n                     '2025-11-23T06:00',\n                     '2025-11-23T07:00',\n                     '2025-11-23T08:00',\n                     '2025-11-23T09:00',\n                     '2025-11-23T10:00',\n                     '2025-11-23T11:00',\n                     '2025-11-23T12:00',\n                     '2025-11-23T13:00',\n                     '2025-11-23T14:00',\n                     '2025-11-23T15:00',\n                     '2025-11-23T16:00',\n                     '2025-11-23T17:00',\n                     '2025-11-23T18:00',\n                     '2025-11-23T19:00',\n                     '2025-11-23T20:00',\n                     '2025-11-23T21:00',\n                     '2025-11-23T22:00',\n                     '2025-11-23T23:00',\n                     '2025-11-24T00:00',\n                     '2025-11-24T01:00',\n                     '2025-11-24T02:00',\n                     '2025-11-24T03:00',\n                     '2025-11-24T04:00',\n                     '2025-11-24T05:00',\n                     '2025-11-24T06:00',\n                     '2025-11-24T07:00',\n                     '2025-11-24T08:00',\n                     '2025-11-24T09:00',\n                     '2025-11-24T10:00',\n                     '2025-11-24T11:00',\n                     '2025-11-24T12:00',\n                     '2025-11-24T13:00',\n                     '2025-11-24T14:00',\n                     '2025-11-24T15:00',\n                     '2025-11-24T16:00',\n                     '2025-11-24T17:00',\n                     '2025-11-24T18:00',\n                     '2025-11-24T19:00',\n                     '2025-11-24T20:00',\n                     '2025-11-24T21:00',\n                     '2025-11-24T22:00',\n                     '2025-11-24T23:00',\n                     '2025-11-25T00:00',\n                     '2025-11-25T01:00',\n                     '2025-11-25T02:00',\n                     '2025-11-25T03:00',\n                     '2025-11-25T04:00',\n                     '2025-11-25T05:00',\n                     '2025-11-25T06:00',\n                     '2025-11-25T07:00',\n                     '2025-11-25T08:00',\n                     '2025-11-25T09:00',\n                     '2025-11-25T10:00',\n                     '2025-11-25T11:00',\n                     '2025-11-25T12:00',\n                     '2025-11-25T13:00',\n                     '2025-11-25T14:00',\n                     '2025-11-25T15:00',\n                     '2025-11-25T16:00',\n                     '2025-11-25T17:00',\n                     '2025-11-25T18:00',\n                     '2025-11-25T19:00',\n                     '2025-11-25T20:00',\n                     '2025-11-25T21:00',\n                     '2025-11-25T22:00',\n                     '2025-11-25T23:00']},\n 'hourly_units': {'rain': 'mm', 'temperature_2m': '°F', 'time': 'iso8601'},\n 'latitude': 39.289543,\n 'longitude': -76.62448,\n 'timezone': 'GMT',\n 'timezone_abbreviation': 'GMT',\n 'utc_offset_seconds': 0}\n\n\n\nWe can extract data into a Pandas dataframe easily:\n\nimport pandas as pd\ntimes = data[\"hourly\"][\"time\"]\ntemps = data[\"hourly\"][\"temperature_2m\"]\nrain = data[\"hourly\"][\"rain\"]\n\ndf = pd.DataFrame({\n    \"Time\": pd.to_datetime(times),\n    \"Temp\": temps,\n    \"Rain\": rain\n})\nprint(df)\n\n                   Time  Temp  Rain\n0   2025-11-19 00:00:00  45.3   0.1\n1   2025-11-19 01:00:00  42.9   0.8\n2   2025-11-19 02:00:00  42.0   0.7\n3   2025-11-19 03:00:00  41.4   0.4\n4   2025-11-19 04:00:00  41.1   0.5\n..                  ...   ...   ...\n163 2025-11-25 19:00:00  50.6   0.0\n164 2025-11-25 20:00:00  50.5   0.0\n165 2025-11-25 21:00:00  50.5   0.0\n166 2025-11-25 22:00:00  50.4   0.0\n167 2025-11-25 23:00:00  50.3   0.0\n\n[168 rows x 3 columns]"
   },
   {
     "objectID": "Introduction-to-APIs-in-Python-Tutorial.html#api-authentication",
     "href": "Introduction-to-APIs-in-Python-Tutorial.html#api-authentication",
     "title": "Introduction to APIs in Python Tutorial",
     "section": "API authentication",
-    "text": "API authentication\nThe APIs we have used up to this point did not require some form of user authentication.\nFor most APIs, however, you will need an API key.\nAn API key is a unique code used to identify and authenticate a user or application when interacting with an API.\nAPI keys are generally a string of alphanumeric characters, and look something like this:\nzaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx\nAPI keys are a security measure to make sure you, or your application, are who you say you are.\nThink of it like an ID card. You wouldn’t want to leave your ID card laying around, and you don’t want to leave your API key laying around either. Anyone could just pick it up and pretend they are you!\nSince API keys are plain text, if API keys are stored in your code, when you share your code, such as on GitHub, they will be readable by everyone that has access to that GitHub repository.\nConsider this code below that uses the NASA API to retrieve weather data from NASA’s InSight (Interior Exploration using Seismic Investigations, Geodesy and Heat Transport) Mars Lander.\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n}\n\nresponse = requests.get(path_url, params=params)\nprint(response.status_code)\n\n403\n\n\nWe see we receive an error status code when we attempt to access the API. This is because we have NOT used an API key to authenticate as an authorized user. Let’s do that now! You can either go to https://api.nasa.gov/ to generate your own API key, or we can use NASA’s demo key, which works for demonstration purposes (alhough does not allow nearly as many API calls as your own key).\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\nAPI_KEY = 'DEMO_KEY'\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nresponse = requests.get(path_url, params=params)\nprint(response.status_code)\n\n200\n\n\nNow we received a valid response (status code 200). The problem is the API key is stored in plain-text as a variable. If this code were shared, anyone would be able to use the API key!\nWe can instead create a file in the same location as our Python project, located at .env (the . prefix means that it is a hidden file).\nIn the .env file, add your API key using this format:\nAPI_KEY=your_actual_api_key_here\nSo, in this case it would be stored as API_KEY=DEMO_KEY.\nThen we can use the os library to load it from the .env file:\n\nimport os\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\nAPI_KEY = os.environ.get('API_KEY')\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nresponse = requests.get(path_url, params=params)\nprint(response.status_code)\n\n200"
+    "text": "API authentication\nThe APIs we have used up to this point did not require some form of user authentication.\nFor most APIs, however, you will need an API key.\nAn API key is a unique code used to identify and authenticate a user or application when interacting with an API.\nAPI keys are generally a string of alphanumeric characters, and look something like this:\nzaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx\nAPI keys are a security measure to make sure you, or your application, are who you say you are.\nThink of it like an ID card. You wouldn’t want to leave your ID card laying around, and you don’t want to leave your API key laying around either. Anyone could just pick it up and pretend they are you!\nSince API keys are plain text, if API keys are stored in your code, when you share your code, such as on GitHub, they will be readable by everyone that has access to that GitHub repository.\nConsider this code below that uses the NASA API to retrieve weather data from NASA’s InSight (Interior Exploration using Seismic Investigations, Geodesy and Heat Transport) Mars Lander.\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n}\n\nresponse = requests.get(path_url, params=params)\nprint(response.status_code)\n\n403\n\n\nWe see we receive an error status code when we attempt to access the API. This is because we have NOT used an API key to authenticate as an authorized user. Let’s do that now! You can either go to https://api.nasa.gov/ to generate your own API key, or we can use NASA’s demo key, which works for demonstration purposes (alhough does not allow nearly as many API calls as your own key).\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\nAPI_KEY = 'DEMO_KEY'\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nresponse = requests.get(path_url, params=params)\nprint(response.status_code)\n\n200\n\n\nNow we received a valid response (status code 200). The problem is the API key is stored in plain-text as a variable. If this code were shared, anyone would be able to use the API key!\nWe can instead create a file in the same location as our Python project, located at .env (the . prefix means that it is a hidden file).\nIn the .env file, add your API key using this format:\nAPI_KEY=your_actual_api_key_here\nSo, in this case it would be stored as API_KEY=DEMO_KEY.\nThen we can use the os library to load it from the .env file:\n\nimport os\n\nBASE_URL = 'https://api.nasa.gov/'\nENDPOINT = 'insight_weather/'\n\nAPI_KEY = os.environ.get('API_KEY')\n\npath_url = f'{BASE_URL}{ENDPOINT}'\n\nparams = {\n    'feedtype': 'json',\n    'ver': '1.0',\n    'api_key': API_KEY\n}\n\nresponse = requests.get(path_url, params=params)\nprint(response.status_code)\n\n403\n\n\n\n\n\n\n\n\nTipHomework\n\n\n\nSee if you can create a table similar to the table below, using the Pokeapi, for all Pokemon.\nTips: - I used the great_tables library to display the table with rendered sprites - You can use data.get('sprites').get('front_default') to find the default sprite for each pokemon\nIf you need help or want to walk through your solution, reach out to dataservices@jhu.edu a I can setup a consultation with you.\n\nimport requests\nimport pandas as pd\nfrom great_tables import GT\nfrom IPython.display import display\n\npokemon_names = [\"pikachu\", \"charmander\", \"bulbasaur\", \"squirtle\"]\nBASE_URL = \"https://pokeapi.co/api/v2/pokemon/\"\n\nrows = []\nfor name in pokemon_names:\n    r = requests.get(BASE_URL + name.lower())\n    r.raise_for_status()\n    data = r.json()\n\n    stats = {s[\"stat\"][\"name\"]: s[\"base_stat\"] for s in data[\"stats\"]}\n\n    rows.append({\n        \"name\": name.capitalize(),\n        \"height\": data[\"height\"],\n        \"weight\": data[\"weight\"],\n        \"hp\": stats.get(\"hp\"),\n        \"attack\": stats.get(\"attack\"),\n        \"defense\": stats.get(\"defense\"),\n        \"sprite\": data[\"sprites\"][\"front_default\"]\n    })\n\ndf = pd.DataFrame(rows)\n\n# Format the numeric columns in the DataFrame\ndf[\"height\"] = df[\"height\"].round(1)        # 1 decimal place\ndf[\"weight\"] = df[\"weight\"].round(1)      # 1 decimal place\ndf[[\"hp\", \"attack\", \"defense\"]] = df[[\"hp\", \"attack\", \"defense\"]].astype(int)\n\n# Or, if you prefer strings with units:\n# df[\"height_m\"] = df[\"height_m\"].map(lambda x: f\"{x:.1f} m\")\n# df[\"weight_kg\"] = df[\"weight_kg\"].map(lambda x: f\"{x:.1f} kg\")\n\ngt = (\n    GT(df)\n    .tab_header(title=\"Pokémon Stats\")\n    .fmt_image(columns=\"sprite\", width='64', height='64')\n)\n\ngt.show()\n\n\n\n\n\n\n\nPokémon Stats\n\n\nname\nheight\nweight\nhp\nattack\ndefense\nsprite\n\n\n\n\nPikachu\n4\n60\n35\n55\n40\n\n\n\nCharmander\n6\n85\n39\n52\n43\n\n\n\nBulbasaur\n7\n69\n45\n49\n49\n\n\n\nSquirtle\n5\n90\n44\n48\n65"
   }
 ]

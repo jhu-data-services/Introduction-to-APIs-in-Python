@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -103,6 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -188,30 +191,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="building-a-request" class="level2">
 <h2 class="anchored" data-anchor-id="building-a-request">Building a request</h2>
-<div id="b9bec4ec" class="cell" data-execution_count="1">
+<div id="1872af09" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Set the base URL to the pokemon API and specify our endpoint.</p>
 <p>Our base url is <code>https://pokeapi.co/api/v2</code>.</p>
 <p>The endpoint of interest is <code>pokemon</code>.</p>
-<div id="f66f0210" class="cell" data-execution_count="2">
+<div id="69314cf6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">'https://pokeapi.co/api/v2'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>endpoint <span class="op">=</span> <span class="st">'pokemon'</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Construct API url from base url and endpoint</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>url_path <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>BASE_URL<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>endpoint<span class="sc">}</span><span class="ss">/'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ecf56cba" class="cell" data-execution_count="3">
+<div id="95a43bee" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Confirm that the request was successful (status code <code>200</code>)</p>
-<div id="047ed056" class="cell" data-execution_count="4">
+<div id="233163fc" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.status_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>200</code></pre>
 </div>
 </div>
 <p>To see the URL that was sent with the get request (which can be helpful for troublshooting a malformed request), you can extract the url path associated with a corresponding response:</p>
-<div id="93be044f" class="cell" data-execution_count="5">
+<div id="b3be4db4" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>https://pokeapi.co/api/v2/pokemon/</code></pre>
@@ -221,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="extracting-and-working-with-data" class="level2">
 <h2 class="anchored" data-anchor-id="extracting-and-working-with-data">Extracting and working with data</h2>
 <p>Extract the JSON (Javascript Object Notation) data payload from a response:</p>
-<div id="ed4b85b7" class="cell" data-execution_count="6">
+<div id="4c737cd8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Before we explore the data, try the following exercise. It may seem daunting, but it will help familiarize you with the structure and type of data returned by the <code>response.json()</code> function.</p>
@@ -250,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="72697938" class="cell" data-execution_count="7">
+<div id="fce5b9ab" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pokemon <span class="kw">in</span> data[<span class="st">'results'</span>]:</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(pokemon.get(<span class="st">'name'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -280,7 +283,7 @@ raticate</code></pre>
 </div>
 </div>
 <p>We are only able to see 20 pokemon. When we explore the data, we see that there are actually 1,382 pokemon:</p>
-<div id="b2227a1b" class="cell" data-execution_count="8">
+<div id="15dd02cc" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The total number of pokemon is: '</span> <span class="op">+</span> <span class="bu">str</span>(data.get(<span class="st">'count'</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>The total number of pokemon is: 1328</code></pre>
@@ -291,7 +294,7 @@ raticate</code></pre>
 <section id="pagination" class="level2">
 <h2 class="anchored" data-anchor-id="pagination">Pagination</h2>
 <p>In our data is a field called <code>next</code>:</p>
-<div id="158f0273" class="cell" data-execution_count="9">
+<div id="e729a46d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.get(<span class="st">'next'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>https://pokeapi.co/api/v2/pokemon/?offset=20&amp;limit=20</code></pre>
@@ -303,7 +306,7 @@ raticate</code></pre>
 <p><code>limit=20</code> tells us to return only 20 pokemon.</p>
 <p>In this way, we can increment the offset by 20, until we have returned all of the pokemon available through the API. Fortunately this API did this work for us, and we only need to make API calls using each <code>next</code> url.</p>
 <p>For example, lets use the first <code>next</code> url to make another API call, and see what the subsequent <code>next</code> url looks like:</p>
-<div id="4f118571" class="cell" data-execution_count="10">
+<div id="e9c923a7" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(data.get(<span class="st">'next'</span>))</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.get(<span class="st">'next'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -314,7 +317,7 @@ raticate</code></pre>
 <p>As you can see, the offset has been incremented by 20.</p>
 <p>We need to find a way of iterating through each <code>next</code> url, making an API call, and collecting the returned data, until the <code>next</code> URL is <code>None</code>, and no data remains.</p>
 <p>We can do this with a while loop. This is not the only way to approach this, but it is one way.</p>
-<div id="11a66642" class="cell" data-execution_count="11">
+<div id="91b1b0b0" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty list that we can collect our data into</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pokemon_list <span class="op">=</span> []</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> url_path:</span>
@@ -327,12 +330,12 @@ raticate</code></pre>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    url_path <span class="op">=</span> data.get(<span class="st">'next'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now try printing all of the pokemon, not just the first 20:</p>
-<div id="339f0429" class="cell" data-execution_count="12">
+<div id="dfe979f4" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pokemon <span class="kw">in</span> pokemon_list:</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(pokemon.get(<span class="st">'name'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="scrolling">
-<div id="18faafd0" class="cell" data-execution_count="13">
+<div id="d7ac420d" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-stdout">
 <pre><code>bulbasaur
 ivysaur
@@ -1669,7 +1672,7 @@ falinks-mega</code></pre>
 <section id="navigating-data" class="level2">
 <h2 class="anchored" data-anchor-id="navigating-data">Navigating data</h2>
 <p>API data is often nested, and may link to other API endpoints. For example, let’s look at the data for bulbasaur:</p>
-<div id="db4da601" class="cell" data-execution_count="14">
+<div id="57641b46" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">'https://pokeapi.co/api/v2'</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>endpoint <span class="op">=</span> <span class="st">'pokemon'</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>pokemon <span class="op">=</span> <span class="st">'bulbasaur'</span></span>
@@ -1679,12 +1682,12 @@ falinks-mega</code></pre>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can print our data in a easier to read format, using the pretty print function from the library <code>pprint</code>:</p>
-<div id="1ab4bca6" class="cell" data-execution_count="15">
+<div id="bea251ae" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pprint</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pprint.pprint(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="scrolling">
-<div id="f789e074" class="cell" data-execution_count="16">
+<div id="584cf134" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-stdout">
 <pre><code>{'abilities': [{'ability': {'name': 'overgrow',
                             'url': 'https://pokeapi.co/api/v2/ability/65/'},
@@ -8388,7 +8391,7 @@ falinks-mega</code></pre>
 </div>
 </div>
 <p>We see there are a number of data elements that point to urls, not values. This means that we need to use a separate API call to access that corresponding value. For example, bulbusaur has the ability <code>overgrow</code>.</p>
-<div id="e922b65f" class="cell" data-execution_count="17">
+<div id="5e72a1b7" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pprint.pprint(data.get(<span class="st">'abilities'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[{'ability': {'name': 'overgrow',
@@ -8402,7 +8405,7 @@ falinks-mega</code></pre>
 </div>
 </div>
 <p>If we want data on that ability, we need to make an API call to the corresponding url:</p>
-<div id="ab864794" class="cell" data-execution_count="18">
+<div id="86591a96" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the first ability (overgrow) url:</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>ability_url <span class="op">=</span> data.get(<span class="st">'abilities'</span>)[<span class="dv">0</span>].get(<span class="st">'ability'</span>).get(<span class="st">'url'</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(ability_url)</span>
@@ -8410,7 +8413,7 @@ falinks-mega</code></pre>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>pprint.pprint(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="scrolling">
-<div id="ac529a4d" class="cell" data-execution_count="19">
+<div id="a0d2c309" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-stdout">
 <pre><code>{'effect_changes': [],
  'effect_entries': [{'effect': 'When this Pokémon has 1/3 or less of its HP '
@@ -9118,7 +9121,7 @@ falinks-mega</code></pre>
 <p>API parameters allow us to specify subsets or constraints for the data we are requesting. We saw two parameters in the pokeapi: <code>offset</code> and <code>limit</code>. Otherwise, we controlled most other data selections by constructing URLs using our endpoints of interest. Other APIs, as we will see soon, rely much more heavily on parameters to provide a means of selecting specific data.</p>
 <p>Let’s use the <a href="https://open-meteo.com/">https://open-meteo.com/</a> API. Open-Meteo is an open-source weather API.</p>
 <p>First let’s setup our base url and endpoint. We will be using the <code>forecast</code> endpoint to get a forecast for the weather in Baltimore, MD.</p>
-<div id="38c1ac0a" class="cell" data-execution_count="20">
+<div id="48569a87" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">"https://api.open-meteo.com/v1/"</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>endpoint <span class="op">=</span> <span class="st">'forecast'</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>url_path <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>BASE_URL<span class="sc">}{</span>endpoint<span class="sc">}</span><span class="ss">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -9127,7 +9130,7 @@ falinks-mega</code></pre>
 <p>The Open-Meteo API uses longitude and latitude to specify location.</p>
 <p>The longitude for Baltimore is 39.3 The latitude for Baltimore is -76.61</p>
 <p>We would like to get data on the forecast in Baltimore, both temperature (in fahrenheit) and projected rain.</p>
-<div id="3b8e862e" class="cell" data-execution_count="21">
+<div id="8be8fe1a" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"latitude"</span>: <span class="fl">39.3</span>,</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"longitude"</span>: <span class="op">-</span><span class="fl">76.61</span>,</span>
@@ -9142,16 +9145,16 @@ falinks-mega</code></pre>
 <li><strong>temperature_2m</strong> means the temperature at 2 meters off the ground, roughly where an adult human might experience the weather.</li>
 </ul>
 <p>Now we can construct our request, using the new <code>params</code> that we defined:</p>
-<div id="92587799" class="cell" data-execution_count="22">
+<div id="b0b1170c" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url<span class="op">=</span>url_path, params<span class="op">=</span>params)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>pprint.pprint(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="scrolling">
-<div id="3341a98c" class="cell" data-execution_count="23">
+<div id="943863d3" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-stdout">
 <pre><code>{'elevation': 16.0,
- 'generationtime_ms': 0.12445449829101562,
+ 'generationtime_ms': 0.09822845458984375,
  'hourly': {'rain': [0.1,
                      0.8,
                      0.7,
@@ -9336,26 +9339,26 @@ falinks-mega</code></pre>
                                43.7,
                                44.1,
                                44.7,
-                               45.1,
-                               46.4,
-                               46.4,
-                               47.1,
-                               46.5,
+                               45.4,
+                               46.3,
+                               45.7,
                                45.9,
-                               44.9,
-                               44.6,
-                               44.4,
-                               44.1,
-                               42.6,
-                               42.3,
-                               41.3,
-                               41.1,
-                               39.6,
-                               38.4,
-                               39.0,
-                               40.3,
-                               40.9,
+                               46.5,
+                               45.4,
+                               44.7,
+                               43.6,
+                               42.9,
+                               43.1,
+                               41.8,
+                               40.4,
                                39.7,
+                               38.8,
+                               38.2,
+                               37.4,
+                               36.6,
+                               36.5,
+                               36.4,
+                               38.2,
                                40.5,
                                41.6,
                                43.3,
@@ -9666,7 +9669,7 @@ falinks-mega</code></pre>
 </div>
 </div>
 <p>We can extract data into a Pandas dataframe easily:</p>
-<div id="b315b338" class="cell" data-execution_count="24">
+<div id="02e9a057" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>times <span class="op">=</span> data[<span class="st">"hourly"</span>][<span class="st">"time"</span>]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>temps <span class="op">=</span> data[<span class="st">"hourly"</span>][<span class="st">"temperature_2m"</span>]</span>
@@ -9707,7 +9710,7 @@ falinks-mega</code></pre>
 <p>Think of it like an ID card. You wouldn’t want to leave your ID card laying around, and you don’t want to leave your API key laying around either. Anyone could just pick it up and pretend they are you!</p>
 <p>Since API keys are plain text, if API keys are stored in your code, when you share your code, such as on GitHub, they will be readable by everyone that has access to that GitHub repository.</p>
 <p>Consider this code below that uses the NASA API to retrieve weather data from NASA’s InSight (Interior Exploration using Seismic Investigations, Geodesy and Heat Transport) Mars Lander.</p>
-<div id="439f09c5" class="cell" data-execution_count="25">
+<div id="e1053a13" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">'https://api.nasa.gov/'</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>ENDPOINT <span class="op">=</span> <span class="st">'insight_weather/'</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -9725,7 +9728,7 @@ falinks-mega</code></pre>
 </div>
 </div>
 <p>We see we receive an error status code when we attempt to access the API. This is because we have NOT used an API key to authenticate as an authorized user. Let’s do that now! You can either go to <a href="https://api.nasa.gov/">https://api.nasa.gov/</a> to generate your own API key, or we can use NASA’s demo key, which works for demonstration purposes (alhough does not allow nearly as many API calls as your own key).</p>
-<div id="889bb1a2" class="cell" data-execution_count="26">
+<div id="82450636" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">'https://api.nasa.gov/'</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ENDPOINT <span class="op">=</span> <span class="st">'insight_weather/'</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="st">'DEMO_KEY'</span></span>
@@ -9750,7 +9753,7 @@ falinks-mega</code></pre>
 <p><code>API_KEY=your_actual_api_key_here</code></p>
 <p>So, in this case it would be stored as <code>API_KEY=DEMO_KEY</code>.</p>
 <p>Then we can use the <code>os</code> library to load it from the <code>.env</code> file:</p>
-<div id="9215523a" class="cell" data-execution_count="27">
+<div id="a2a2cb73" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">'https://api.nasa.gov/'</span></span>
@@ -9769,11 +9772,183 @@ falinks-mega</code></pre>
 <span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(path_url, params<span class="op">=</span>params)</span>
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.status_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>200</code></pre>
+<pre><code>403</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Homework
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>See if you can create a table similar to the table below, using the Pokeapi, for all Pokemon.</p>
+<p>Tips: - I used the <code>great_tables</code> library to display the table with rendered sprites - You can use <code>data.get('sprites').get('front_default')</code> to find the default sprite for each pokemon</p>
+<p>If you need help or want to walk through your solution, reach out to <a href="dataservices@jhu.edu">dataservices@jhu.edu</a> a I can setup a consultation with you.</p>
+<div id="963b6a16" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> great_tables <span class="im">import</span> GT</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>pokemon_names <span class="op">=</span> [<span class="st">"pikachu"</span>, <span class="st">"charmander"</span>, <span class="st">"bulbasaur"</span>, <span class="st">"squirtle"</span>]</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">"https://pokeapi.co/api/v2/pokemon/"</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> pokemon_names:</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> requests.get(BASE_URL <span class="op">+</span> name.lower())</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    r.raise_for_status()</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    stats <span class="op">=</span> {s[<span class="st">"stat"</span>][<span class="st">"name"</span>]: s[<span class="st">"base_stat"</span>] <span class="cf">for</span> s <span class="kw">in</span> data[<span class="st">"stats"</span>]}</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    rows.append({</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"name"</span>: name.capitalize(),</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"height"</span>: data[<span class="st">"height"</span>],</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weight"</span>: data[<span class="st">"weight"</span>],</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hp"</span>: stats.get(<span class="st">"hp"</span>),</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"attack"</span>: stats.get(<span class="st">"attack"</span>),</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"defense"</span>: stats.get(<span class="st">"defense"</span>),</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"sprite"</span>: data[<span class="st">"sprites"</span>][<span class="st">"front_default"</span>]</span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(rows)</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Format the numeric columns in the DataFrame</span></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"height"</span>] <span class="op">=</span> df[<span class="st">"height"</span>].<span class="bu">round</span>(<span class="dv">1</span>)        <span class="co"># 1 decimal place</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"weight"</span>] <span class="op">=</span> df[<span class="st">"weight"</span>].<span class="bu">round</span>(<span class="dv">1</span>)      <span class="co"># 1 decimal place</span></span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"hp"</span>, <span class="st">"attack"</span>, <span class="st">"defense"</span>]] <span class="op">=</span> df[[<span class="st">"hp"</span>, <span class="st">"attack"</span>, <span class="st">"defense"</span>]].astype(<span class="bu">int</span>)</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, if you prefer strings with units:</span></span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a><span class="co"># df["height_m"] = df["height_m"].map(lambda x: f"{x:.1f} m")</span></span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a><span class="co"># df["weight_kg"] = df["weight_kg"].map(lambda x: f"{x:.1f} kg")</span></span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>gt <span class="op">=</span> (</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>    GT(df)</span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>    .tab_header(title<span class="op">=</span><span class="st">"Pokémon Stats"</span>)</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>    .fmt_image(columns<span class="op">=</span><span class="st">"sprite"</span>, width<span class="op">=</span><span class="st">'64'</span>, height<span class="op">=</span><span class="st">'64'</span>)</span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a>gt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="hoyxfoehsq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#hoyxfoehsq table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#hoyxfoehsq thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#hoyxfoehsq p { margin: 0; padding: 0; }
+ #hoyxfoehsq .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #hoyxfoehsq .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #hoyxfoehsq .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #hoyxfoehsq .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #hoyxfoehsq .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #hoyxfoehsq .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #hoyxfoehsq .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #hoyxfoehsq .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #hoyxfoehsq .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #hoyxfoehsq .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #hoyxfoehsq .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #hoyxfoehsq .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #hoyxfoehsq .gt_spanner_row { border-bottom-style: hidden; }
+ #hoyxfoehsq .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #hoyxfoehsq .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #hoyxfoehsq .gt_from_md> :first-child { margin-top: 0; }
+ #hoyxfoehsq .gt_from_md> :last-child { margin-bottom: 0; }
+ #hoyxfoehsq .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #hoyxfoehsq .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #hoyxfoehsq .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #hoyxfoehsq .gt_row_group_first td { border-top-width: 2px; }
+ #hoyxfoehsq .gt_row_group_first th { border-top-width: 2px; }
+ #hoyxfoehsq .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #hoyxfoehsq .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #hoyxfoehsq .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #hoyxfoehsq .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #hoyxfoehsq .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #hoyxfoehsq .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #hoyxfoehsq .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #hoyxfoehsq .gt_left { text-align: left; }
+ #hoyxfoehsq .gt_center { text-align: center; }
+ #hoyxfoehsq .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #hoyxfoehsq .gt_font_normal { font-weight: normal; }
+ #hoyxfoehsq .gt_font_bold { font-weight: bold; }
+ #hoyxfoehsq .gt_font_italic { font-style: italic; }
+ #hoyxfoehsq .gt_super { font-size: 65%; }
+ #hoyxfoehsq .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #hoyxfoehsq .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="7" class="gt_heading gt_title gt_font_normal">Pokémon Stats</td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">name</th>
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">height</th>
+<th id="weight" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">weight</th>
+<th id="hp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">hp</th>
+<th id="attack" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">attack</th>
+<th id="defense" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">defense</th>
+<th id="sprite" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">sprite</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left">Pikachu</td>
+<td class="gt_row gt_right">4</td>
+<td class="gt_row gt_right">60</td>
+<td class="gt_row gt_right">35</td>
+<td class="gt_row gt_right">55</td>
+<td class="gt_row gt_right">40</td>
+<td class="gt_row gt_left"><span style="white-space:nowrap;"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" class="img-fluid" style="height: 64;width: 64;vertical-align: middle;"></span></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Charmander</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_right">85</td>
+<td class="gt_row gt_right">39</td>
+<td class="gt_row gt_right">52</td>
+<td class="gt_row gt_right">43</td>
+<td class="gt_row gt_left"><span style="white-space:nowrap;"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" class="img-fluid" style="height: 64;width: 64;vertical-align: middle;"></span></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Bulbasaur</td>
+<td class="gt_row gt_right">7</td>
+<td class="gt_row gt_right">69</td>
+<td class="gt_row gt_right">45</td>
+<td class="gt_row gt_right">49</td>
+<td class="gt_row gt_right">49</td>
+<td class="gt_row gt_left"><span style="white-space:nowrap;"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" class="img-fluid" style="height: 64;width: 64;vertical-align: middle;"></span></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Squirtle</td>
+<td class="gt_row gt_right">5</td>
+<td class="gt_row gt_right">90</td>
+<td class="gt_row gt_right">44</td>
+<td class="gt_row gt_right">48</td>
+<td class="gt_row gt_right">65</td>
+<td class="gt_row gt_left"><span style="white-space:nowrap;"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" class="img-fluid" style="height: 64;width: 64;vertical-align: middle;"></span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
 </div>
 </div>
 
 
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
