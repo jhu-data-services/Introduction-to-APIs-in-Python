@@ -1,0 +1,371 @@
+---
+title: "Introduction to APIs in Python Tutorial"
+format: html
+css: styles.css
+toc: TRUE
+---
+
+## Building a request 
+```{python}
+import requests
+```
+
+Set the base URL to the pokemon API and specify our endpoint.
+
+Our base url is `https://pokeapi.co/api/v2`.
+
+The endpoint of interest is `pokemon`.  
+
+```{python}
+BASE_URL = 'https://pokeapi.co/api/v2'
+endpoint = 'pokemon'
+## Construct API url from base url and endpoint
+url_path = f'{BASE_URL}/{endpoint}/'
+```
+
+```{python}
+response = requests.get(url_path)
+```
+
+
+Confirm that the request was successful (status code `200`)
+```{python}
+print(response.status_code)
+```
+
+To see the URL that was sent with the get request (which can be helpful for troublshooting a malformed request), you can extract the url path associated with a corresponding response:
+
+```{python}
+print(response.url)
+```
+
+## Extracting and working with data
+
+Extract the JSON (Javascript Object Notation) data payload from a response:
+
+
+```{python}
+data = response.json()
+```
+
+Before we explore the data, try the following exercise. It may seem daunting, but it will help familiarize you with the structure and type of data returned by the `response.json()` function. 
+
+::: {.callout-tip}
+## Exercise 1: Print all of the pokemon names from the first page of results returned by the API.
+
+**Tip:** `response.json()` converts the `json` payload to a dictionary in Python.
+:::
+
+::: {.callout-tip collapse="true"}
+### Exercise 1 Solution
+```{python}
+for pokemon in data['results']:
+    print(pokemon.get('name'))
+```
+:::
+
+We are only able to see 20 pokemon. When we explore the data, we see that there are actually 1,382 pokemon:
+
+```{python}
+print('The total number of pokemon is: ' + str(data.get('count')))
+```
+
+Each batch of results returned by an API is called a page. To extract more than one page, we need to use a technique called **pagination**.
+
+## Pagination
+
+In our data is a field called `next`:
+
+
+```{python}
+print(data.get('next'))
+```
+
+The `next` field contains a URL that correspond to a get request API url that points to the next page of data. 
+
+There are two parameters that govern which page we are retrieving, `offset` and `limit`.
+
+`offset=20` tells us to start with the next 20 pokemon.
+
+`limit=20` tells us to return only 20 pokemon. 
+
+In this way, we can increment the offset by 20, until we have returned all of the pokemon available through the API. Fortunately this API did this work for us, and we only need to make API calls using each `next` url.
+
+For example, lets use the first `next` url to make another API call, and see what the subsequent `next` url looks like:
+
+```{python}
+response = requests.get(data.get('next'))
+data = response.json()
+print(data.get('next'))
+```
+
+As you can see, the offset has been incremented by 20. 
+
+We need to find a way of iterating through each `next` url, making an API call, and collecting the returned data, until the `next` URL is `None`, and no data remains. 
+
+We can do this with a while loop. This is not the only way to approach this, but it is one way. 
+
+
+```{python}
+# Create an empty list that we can collect our data into
+pokemon_list = []
+while url_path:
+    response = requests.get(url_path)
+    data = response.json()
+    # Extend since we are adding a list, not append, which only 
+    # adds a single element.
+    pokemon_list.extend(data.get('results'))
+    # Make sure to update the url to the next url in the API response
+    url_path = data.get('next')
+```
+
+Now try printing all of the pokemon, not just the first 20:
+
+
+```{python}
+#| eval: false
+for pokemon in pokemon_list:
+    print(pokemon.get('name'))
+```
+
+:::{.scrolling}
+```{python}
+#| echo: false
+for pokemon in pokemon_list:
+    print(pokemon.get('name'))
+```
+:::
+
+## Navigating data
+
+API data is often nested, and may link to other API endpoints. For example, let's look at the data for bulbasaur:
+
+
+```{python}
+BASE_URL = 'https://pokeapi.co/api/v2'
+endpoint = 'pokemon'
+pokemon = 'bulbasaur'
+## Construct API url from base url and endpoint
+url_path = f'{BASE_URL}/{endpoint}/{pokemon}'
+response = requests.get(url_path)
+data = response.json()
+```
+
+We can print our data in a easier to read format, using the pretty print function from the library `pprint`:
+
+
+```{python}
+#| eval: false
+import pprint
+pprint.pprint(data)
+```
+
+:::{.scrolling}
+```{python}
+#| echo: false
+import pprint
+pprint.pprint(data)
+```
+:::
+
+We see there are a number of data elements that point to urls, not values. This means that we need to use a separate API call to access that corresponding value. For example, bulbusaur has the ability `overgrow`. 
+
+```{python}
+pprint.pprint(data.get('abilities'))
+```
+
+If we want data on that ability, we need to make an API call to the corresponding url:
+
+
+```{python}
+#| eval: false
+# Get the first ability (overgrow) url:
+ability_url = data.get('abilities')[0].get('ability').get('url')
+response = requests.get(ability_url)
+data = response.json()
+pprint.pprint(data)
+```
+
+:::{.scrolling}
+```{python}
+#| echo: false
+# Get the first ability (overgrow) url:
+ability_url = data.get('abilities')[0].get('ability').get('url')
+response = requests.get(ability_url)
+data = response.json()
+pprint.pprint(data)
+```
+:::
+
+
+Now we can explore information about that effect, including listing the other pokemon that possess that effect. In this way, the effect acts like a **primary key** in a database, and allows us to combine information from different endpoints.
+
+
+## API parameters 
+
+Let's move to a new API to explore another way of selecting and filtering data via API – **parameters**. 
+
+
+API parameters allow us to specify subsets or constraints for the data we are requesting. We saw two parameters in the pokeapi: `offset` and `limit`. Otherwise, we controlled most other data selections by constructing URLs using our endpoints of interest. Other APIs, as we will see soon, rely much more heavily on parameters to provide a means of selecting specific data. 
+
+Let's use the [https://open-meteo.com/](https://open-meteo.com/) API. Open-Meteo is an open-source weather API. 
+
+First let's setup our base url and endpoint. We will be using the `forecast` endpoint to get a forecast for the weather in Baltimore, MD. 
+
+```{python}
+BASE_URL = "https://api.open-meteo.com/v1/"
+endpoint = 'forecast'
+url_path = f'{BASE_URL}{endpoint}'
+```
+
+
+To specify our parameters, we create a dictionary, with key-value pairs. 
+
+The Open-Meteo API uses longitude and latitude to specify location.
+
+The longitude for Baltimore is 39.3
+The latitude for Baltimore is -76.61
+
+We would like to get data on the forecast in Baltimore, both temperature (in fahrenheit) and projected rain. 
+
+
+```{python}
+params = {
+	"latitude": 39.3,
+	"longitude": -76.61,
+	"hourly": ["temperature_2m", "rain"],
+	"temperature_unit": "fahrenheit",
+}
+```
+
+Some things to note:
+
+- Latitude and longitude are provided as decimal values
+- Hourly indicates we want hourly data on the provided variables. Since we have two (temperature and rain) we provide them as a list. 
+- **temperature_2m** means the temperature at 2 meters off the ground, roughly where an adult human might experience the weather.
+  
+
+Now we can construct our request, using the new `params` that we defined:
+
+
+```{python}
+#| eval: false
+response = requests.get(url=url_path, params=params)
+data = response.json()
+pprint.pprint(data)
+```
+
+:::{.scrolling}
+```{python}
+#| echo: false
+response = requests.get(url=url_path, params=params)
+data = response.json()
+pprint.pprint(data)
+```
+:::
+
+We can extract data into a Pandas dataframe easily: 
+
+
+```{python}
+import pandas as pd
+times = data["hourly"]["time"]
+temps = data["hourly"]["temperature_2m"]
+rain = data["hourly"]["rain"]
+
+df = pd.DataFrame({
+    "Time": pd.to_datetime(times),
+    "Temp": temps,
+    "Rain": rain
+})
+print(df)
+```
+
+## API authentication
+
+The APIs we have used up to this point did not require some form of user authentication.
+
+For most APIs, however, you will need an API key.
+
+An API key is a unique code used to identify and authenticate a user or application when interacting with an API.
+
+API keys are generally a string of alphanumeric characters, and look something like this:
+
+`zaCELgL0imfnc8mVLWwsAawjYr4RxAf50DDqtlx`
+
+API keys are a security measure to make sure you, or your application, are who you say you are.
+
+Think of it like an ID card. You wouldn’t want to leave your ID card laying around, and you don’t want to leave your API key laying around either. Anyone could just pick it up and pretend they are you!
+
+Since API keys are plain text, if API keys are stored in your code, when you share your code, such as on GitHub, they will be readable by everyone that has access to that GitHub repository.
+
+Consider this code below that uses the NASA API to retrieve weather data from NASA's InSight (Interior Exploration using Seismic Investigations, Geodesy and Heat Transport) Mars Lander. 
+
+
+```{python}
+BASE_URL = 'https://api.nasa.gov/'
+ENDPOINT = 'insight_weather/'
+
+path_url = f'{BASE_URL}{ENDPOINT}'
+
+params = {
+    'feedtype': 'json',
+    'ver': '1.0',
+}
+
+response = requests.get(path_url, params=params)
+print(response.status_code)
+```
+
+We see we receive an error status code when we attempt to access the API. This is because we have NOT used an API key to authenticate as an authorized user. Let's do that now! You can either go to [https://api.nasa.gov/](https://api.nasa.gov/) to generate your own API key, or we can use NASA's demo key, which works for demonstration purposes (alhough does not allow nearly as many API calls as your own key).
+
+```{python}
+BASE_URL = 'https://api.nasa.gov/'
+ENDPOINT = 'insight_weather/'
+API_KEY = 'DEMO_KEY'
+
+path_url = f'{BASE_URL}{ENDPOINT}'
+
+params = {
+    'feedtype': 'json',
+    'ver': '1.0',
+    'api_key': API_KEY
+}
+
+response = requests.get(path_url, params=params)
+print(response.status_code)
+```
+
+
+Now we received a valid response (status code `200`). The problem is the API key is stored in plain-text as a variable. If this code were shared, anyone would be able to use the API key!
+
+We can instead create a file in the same location as our Python project, located at `.env` (the `.` prefix means that it is a hidden file). 
+
+In the `.env` file, add your API key using this format:
+
+`API_KEY=your_actual_api_key_here`
+
+So, in this case it would be stored as `API_KEY=DEMO_KEY`.
+
+Then we can use the `os` library to load it from the `.env` file:
+
+```{python}
+import os
+
+BASE_URL = 'https://api.nasa.gov/'
+ENDPOINT = 'insight_weather/'
+
+API_KEY = os.environ.get('API_KEY')
+
+path_url = f'{BASE_URL}{ENDPOINT}'
+
+params = {
+    'feedtype': 'json',
+    'ver': '1.0',
+    'api_key': API_KEY
+}
+
+response = requests.get(path_url, params=params)
+print(response.status_code)
+```
+

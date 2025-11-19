@@ -1,0 +1,15 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Introduction to APIs in Python Materials"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.html
+      - text: "Presentation"
+        href: Introduction-to-APIs-in-Python-Presentation.html
+      - text: "Tutorial"
+        href: Introduction-to-APIs-in-Python-Tutorial.html
+
